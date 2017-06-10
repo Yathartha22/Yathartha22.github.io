@@ -1,6 +1,7 @@
 # Site settings
 title: Yathartha Joshi
 name: Yathartha Joshi
+tagline: 'Open Source Enthusiast'
 subtitle: Learnings, Ramblings and Rants. In that order.
 email: yathartha32@gmail.com
 description: >
@@ -10,8 +11,6 @@ url: "https://Yathartha22.github.io/"
 github_username:  Yathartha22
 disqus_baseurl: "https://Yathartha22.github.io/"
 permalink: :title
-cover: "/assets/header_image.jpg"
-logo: "/assets/nr-logo.jpg"
 ga_tracking_id: "UA-82647777-1"
 
 
@@ -47,7 +46,3 @@ gems:
 
 exclude:
   - "/vendor/"
-
-# Collections
-collections:
-  - talks

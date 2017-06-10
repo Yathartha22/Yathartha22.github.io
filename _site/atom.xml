@@ -4,7 +4,7 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-06-09T10:38:21+05:30</updated>
+ <updated>2017-06-10T00:47:24+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
@@ -13,15 +13,64 @@
 
  
  <entry>
-   <title>First Blog</title>
-   <link href="http://localhost:4000/first-blog"/>
+   <title>All about GSoC</title>
+   <link href="http://localhost:4000/gsoc-preparation"/>
    <updated>2017-06-09T00:00:00+05:30</updated>
-   <id>http://localhost:4000/first-blog</id>
-   <content type="html">&lt;p&gt;This is actually my first blog in Github pages. This will actually be the official site of my blogs from now. Initially I had it Wordpress &lt;a href=&quot;https://yaj22.wordpress.com&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+   <id>http://localhost:4000/gsoc-preparation</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;https://geekfeminismdotorg.files.wordpress.com/2016/02/gsoc2016logo.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Stay tuned for more blogs.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;What is GSoC, What it takes it to be a part of GSoC and everthing about GSoC.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Thanks!!&lt;/p&gt;
+&lt;p&gt;GSoC is a platform which every student dreams of and I am one of those who really want to be a part.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-actually-gsoc-is&quot;&gt;What actually GSoC is?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://summerofcode.withgoogle.com/&quot;&gt;Google Summer of Code&lt;/a&gt; is a global program focused on bringing more student developers into open source software development. Students work with an open source organization on a 3 month programming project during their break from school.
+The primary aim of this program is to promote &lt;strong&gt;Open Source Software Development&lt;/strong&gt;. It was initiated in May 2005 and is still being conducted.&lt;/p&gt;
+
+&lt;p&gt;Selected students are provided with stipends by &lt;em&gt;Google&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;pre-requisites&quot;&gt;Pre-requisites&lt;/h2&gt;
+
+&lt;p&gt;The requirements to be a part of GSoC is&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;You must be at least 18 years of age&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You must currently be a full or part-time student (or have been accepted for the fall term) at an accredited university as of the student     acceptance date.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-prepare-for-gsoc&quot;&gt;How to prepare for GSoC&lt;/h2&gt;
+
+&lt;p&gt;Well, preparing for GSoC takes a lot of patience and dedication. I will try to cover my experience on what all difficulties I faced during my preparation.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;First of all you need to chose an organization for which you will be applying and working for the rest of months(if selected).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You should be well aware of what the organization does, who all are the lead developers, mentors and everything about the organization.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Also you should have spent quite a time working with the organization. I suggest you to start contributing as early as possible, because more the time you contribute to the organization the more chances it gets for you being selected.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;I started working with &lt;a href=&quot;http://www.sympy.org/en/index.html&quot;&gt;Sympy&lt;/a&gt; before 3 months of the GSoC time. I got along with Sympy’s development workflow and submitted few patches and even raised few issues. That is what has to be done to understand the organization properly. For reference on how to start contributing in Open Source you can have a read of my another blog &lt;a href=&quot;https://yaj22.wordpress.com/2017/02/12/contributing-to-open-source/&quot;&gt;Contributing To Open Source&lt;/a&gt;, in which I have tried to cover how to contribute in open source as a newbie.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;After selecting the organization an application has to be sent suggesting your propsal. Start analysing what you will be proposing in the application. You can either propose a completely new project to work on or either you can chose to work on already established projects.&lt;/p&gt;
+
+&lt;p&gt;Try to prepare your application as strong as possible. There is around 14-15 days for you to prepare your application and submit it to the organization. Start working and understanding what has been propsed in the appliation. Try to summarize yourself in a brief and an appropriate manner. Include all the things you have done with the organization, even include your past experience, if any. You can even refer to the senior developers, previous year GSoCers who could advice you to improve the application. Submit your application soon, do not wait for the last moment. One can have a look over the previous years proposals for refreneces.&lt;/p&gt;
+
+&lt;p&gt;After submitting the propsal be patient for about a month, because results won’t be out before that. Continue contributing and even if you are not selected don’t get yourself disheartened, because &lt;em&gt;&lt;strong&gt;there is always a second a chance&lt;/strong&gt;&lt;/em&gt;, you just need to be optimistic.&lt;/p&gt;
+
+&lt;p&gt;Hope these information might get you a start if you are willing to be a part of the prestigious GSoC.&lt;/p&gt;
+
+&lt;p&gt;All the best and happy coding!! 🙂&lt;/p&gt;
+
 </content>
  </entry>
  
