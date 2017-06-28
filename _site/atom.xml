@@ -4,13 +4,115 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-06-28T23:09:14+05:30</updated>
+ <updated>2017-06-29T00:28:33+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>API and Django Rest Framework</title>
+   <link href="http://localhost:4000/api-and-django-rest-framework"/>
+   <updated>2017-06-29T00:00:00+05:30</updated>
+   <id>http://localhost:4000/api-and-django-rest-framework</id>
+   <content type="html">&lt;p&gt;I have been learning Django, and meanwhile, I came across API and thought how to build them. Consequently, I found &lt;strong&gt;Django Rest Framework&lt;/strong&gt;, commonly known as DRF. Before going deep into the topic let’s get clear with the definition what actually an API is.&lt;/p&gt;
+
+&lt;p&gt;API as defined by &lt;a href=&quot;https://en.wikipedia.org/wiki/Application_programming_interface&quot;&gt;Wikipedia&lt;/a&gt;,&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;In computer programming, an Application Programming Interface (API) is a set of subroutine definitions, protocols, and tools for building application software. In general terms, it is a set of clearly defined methods of communication between various software components.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bit technical, let me make it more simple for you. Think of an API as a waiter in a restaurant. You are sitting on a table with a menu of choices to order from and a kitchen is a part of the system that will prepare your order, what’s missing is the critical link to communicate your order to the kitchen and deliver food back to you. This is where a waiter or an API comes into action.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;API&lt;/strong&gt; is an interface between the &lt;em&gt;Application&lt;/em&gt; and the &lt;em&gt;Program&lt;/em&gt;. You might have heard of Youtube API, what does it mean is Youtube API will be a set of functions or procedure that you can use to run youtube functionality on your website(or any application). A good API makes it easier to develop a program by providing all the building blocks. A programmer then puts the blocks together.&lt;/p&gt;
+
+&lt;p&gt;I guess API term might have cleared by now. So let’s get started with what actually is DRF.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DRF&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/DRF.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As defined in the official &lt;a href=&quot;http://www.django-rest-framework.org/&quot;&gt;documentation of DRS&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Django REST framework is a powerful and flexible toolkit for building Web APIs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The term REST stands for &lt;strong&gt;Representational State Transfer (REST).&lt;/strong&gt;  REST advocates that web applications should use HTTP as it was originally envisioned. Lookups should use GETrequests. PUT, POST, and DELETE requests should be used for creation, mutation, and deletion. I am not going into much detail about what REST is. You can refer to &lt;a href=&quot;https://stackoverflow.com/a/671132/6446166&quot;&gt;this&lt;/a&gt; Stackoverflow answer for details.&lt;/p&gt;
+
+&lt;p&gt;Django REST framework contains a wide set of out of the box features, but the core view class is very simple and framework, in general, is easy to use.&lt;/p&gt;
+
+&lt;p&gt;The main idea behind of DRF is to clearly divide a model, the generalized wire representation (e.g. JSON, XML, etc.), and set of generic Class-Based-Views that can be customized to satisfy the specific API endpoint using Serializer that describes the mapping between them.&lt;/p&gt;
+
+&lt;p&gt;What I like about DRF, which makes it different from other framework is that it allows developers to define URL structure and not rely on an auto-generated one, while others automate much of the conversion from Django models to REST endpoints, thus are less flexible.&lt;/p&gt;
+
+&lt;p&gt;Moreover, Django REST Framework includes built-in API browser for testing out newly developed API.&lt;/p&gt;
+
+&lt;p&gt;DRF provides a set of authentication policies out of the box (including &lt;a href=&quot;http://www.django-rest-framework.org/api-guide/authentication#oauthauthentication&quot;&gt;OAuth1a&lt;/a&gt; and &lt;a href=&quot;http://www.django-rest-framework.org/api-guide/authentication#oauth2authentication&quot;&gt;OAuth2&lt;/a&gt; and gives an opportunity to develop custom schemes.&lt;/p&gt;
+
+&lt;p&gt;Still, I have to learn a lot of stuff in DRF I will keep posting whatever new and interesting things I learn  &lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Django</title>
+   <link href="http://localhost:4000/django"/>
+   <updated>2017-06-28T00:00:00+05:30</updated>
+   <id>http://localhost:4000/django</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/public/django.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well, it’s been a long time that I haven’t written about anything. So I thought to write about what I am learning for the past few days &lt;strong&gt;Django&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;I will get started with the definition first&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Django is a high level python web framework. It is free and open source, written in python.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Like any other framework, Django also supports MVC(&lt;strong&gt;M&lt;/strong&gt;odel &lt;strong&gt;V&lt;/strong&gt;iew &lt;strong&gt;C&lt;/strong&gt;ontroller) pattern. It follows MVC closely, however, it does use its own logic in the implementation. Because the “C(&lt;strong&gt;C&lt;/strong&gt;ontroller)” is handled by the framework itself and most of the excitement in Django happens in models, templates and views, Django is often referred to as an MTV(&lt;strong&gt;M&lt;/strong&gt;odel &lt;strong&gt;T&lt;/strong&gt;emplate &lt;strong&gt;V&lt;/strong&gt;iew) framework.
+Not going into much detail what MVC or MTV is, just know that Django’s View is more like the Controller in MVC, and MVC’s View is actually a Template in Django. Therefore the name MTV.&lt;/p&gt;
+
+&lt;p&gt;That was a bit of an introduction to what actually &lt;em&gt;Django&lt;/em&gt; is. The reason why I chose Django was that I was involved with Python(coding as well as open source) for quite a time so I thought why not try Python in web development, so I started with Django.&lt;/p&gt;
+
+&lt;p&gt;What I like the most about Django, is we can actually create dynamic websites really fast, you don’t need to worry about most things, you just define your data model and off you go. With Django, you can take Web applications from concept to launch in a matter of hours. Django takes care of much of the hassle of Web development so you can focus on writing your app without needing to reinvent the wheel. Another thing that I appreciate and like is Django’s community and resources. It has a huge community ready to help anytime. Django’s open source community Also it has it’s resources are properly documented.Django’s documentation&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why Django?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Ridiculously fast&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Django is designed to help developers take applications from concept to completion as quickly as possible.&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Fully loaded&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Django includes dozens of extras you can use to handle common Web development tasks. Django takes care of user authentication, content       administration, site maps, RSS feeds, and many more tasks — right out of the box.&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Reassuringly secure&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Django takes security seriously and helps developers avoid many common security mistakes, such as SQL injection, cross-site scripting, cross-site request forgery and clickjacking. Its user authentication system provides a secure way to manage user accounts and passwords.&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Exceedingly scalable&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Some of the busiest sites on the planet use Django’s ability to quickly and flexibly scale to meet the heaviest traffic demands.&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Incredibly versatile&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;em&gt;Companies, organizations and governments have used Django to build all sorts of things — from content management systems to social networks   to scientific computing platforms.&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I think if you are a &lt;em&gt;Python&lt;/em&gt; lover you should give &lt;em&gt;Django&lt;/em&gt; a try…!!  I will come up with more experiences with Django, till then All the best 👍 and Happy coding 😃&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>All about GSoC</title>

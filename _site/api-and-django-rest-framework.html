@@ -11,7 +11,7 @@
 
   <title>
     
-      All about GSoC &middot; Yathartha Joshi
+      API and Django Rest Framework &middot; Yathartha Joshi
     
   </title>
 
@@ -131,62 +131,45 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">All about GSoC</h1>
-  <span class="post-date">09 Jun 2017</span>
-   <p><img src="https://geekfeminismdotorg.files.wordpress.com/2016/02/gsoc2016logo.jpg" alt="" /></p>
+  <h1 class="post-title">API and Django Rest Framework</h1>
+  <span class="post-date">29 Jun 2017</span>
+   <p>I have been learning Django, and meanwhile, I came across API and thought how to build them. Consequently, I found <strong>Django Rest Framework</strong>, commonly known as DRF. Before going deep into the topic let’s get clear with the definition what actually an API is.</p>
 
-<p><em>What is GSoC, What it takes it to be a part of GSoC and everything about GSoC.</em></p>
+<p>API as defined by <a href="https://en.wikipedia.org/wiki/Application_programming_interface">Wikipedia</a>,</p>
 
-<p>GSoC is a platform which every student dreams of and I am one of those who really want to be a part.</p>
+<blockquote>
+  <p><em>In computer programming, an Application Programming Interface (API) is a set of subroutine definitions, protocols, and tools for building application software. In general terms, it is a set of clearly defined methods of communication between various software components.</em></p>
+</blockquote>
 
-<h2 id="what-actually-gsoc-is">What actually GSoC is?</h2>
+<p>Bit technical, let me make it more simple for you. Think of an API as a waiter in a restaurant. You are sitting on a table with a menu of choices to order from and a kitchen is a part of the system that will prepare your order, what’s missing is the critical link to communicate your order to the kitchen and deliver food back to you. This is where a waiter or an API comes into action.</p>
 
-<p><a href="https://summerofcode.withgoogle.com/">Google Summer of Code</a> is a global program focused on bringing more student developers into open source software development. Students work with an open source organization on a 3 month programming project during their break from school.
-The primary aim of this program is to promote <strong>Open Source Software Development</strong>. It was initiated in May 2005 and is still being conducted.</p>
+<p><strong>API</strong> is an interface between the <em>Application</em> and the <em>Program</em>. You might have heard of Youtube API, what does it mean is Youtube API will be a set of functions or procedure that you can use to run youtube functionality on your website(or any application). A good API makes it easier to develop a program by providing all the building blocks. A programmer then puts the blocks together.</p>
 
-<p>Selected students are provided with stipends by <em>Google</em>.</p>
+<p>I guess API term might have cleared by now. So let’s get started with what actually is DRF.</p>
 
-<h2 id="pre-requisites">Pre-requisites</h2>
+<p><strong>DRF</strong></p>
 
-<p>The requirements to be a part of GSoC is</p>
+<p><img src="/public/DRF.png" alt="" /></p>
 
-<ul>
-  <li>
-    <p>You must be at least 18 years of age</p>
-  </li>
-  <li>
-    <p>You must currently be a full or part-time student (or have been accepted for the fall term) at an accredited university as of the student     acceptance date.</p>
-  </li>
-</ul>
+<p>As defined in the official <a href="http://www.django-rest-framework.org/">documentation of DRS</a></p>
 
-<h2 id="how-to-prepare-for-gsoc">How to prepare for GSoC</h2>
+<blockquote>
+  <p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p>
+</blockquote>
 
-<p>Well, preparing for GSoC takes a lot of patience and dedication. I will try to cover my experience on what all difficulties I faced during my preparation.</p>
+<p>The term REST stands for <strong>Representational State Transfer (REST).</strong>  REST advocates that web applications should use HTTP as it was originally envisioned. Lookups should use GETrequests. PUT, POST, and DELETE requests should be used for creation, mutation, and deletion. I am not going into much detail about what REST is. You can refer to <a href="https://stackoverflow.com/a/671132/6446166">this</a> Stackoverflow answer for details.</p>
 
-<ul>
-  <li>
-    <p>First of all you need to chose an organization for which you will be applying and working for the rest of months(if selected).</p>
-  </li>
-  <li>
-    <p>You should be well aware of what the organization does, who all are the lead developers, mentors and everything about the organization.</p>
-  </li>
-  <li>
-    <p>Also you should have spent quite a time working with the organization. I suggest you to start contributing as early as possible, because more the time you contribute to the organization the more chances it gets for you being selected.</p>
-  </li>
-</ul>
+<p>Django REST framework contains a wide set of out of the box features, but the core view class is very simple and framework, in general, is easy to use.</p>
 
-<p><em>I started working with <a href="http://www.sympy.org/en/index.html">Sympy</a> before 3 months of the GSoC time. I got along with Sympy’s development workflow and submitted few patches and even raised few issues. That is what has to be done to understand the organization properly. For reference on how to start contributing in Open Source you can have a read of my another blog <a href="https://yaj22.wordpress.com/2017/02/12/contributing-to-open-source/">Contributing To Open Source</a>, in which I have tried to cover how to contribute in open source as a newbie.</em></p>
+<p>The main idea behind of DRF is to clearly divide a model, the generalized wire representation (e.g. JSON, XML, etc.), and set of generic Class-Based-Views that can be customized to satisfy the specific API endpoint using Serializer that describes the mapping between them.</p>
 
-<p>After selecting the organization an application has to be sent suggesting your propsal. Start analysing what you will be proposing in the application. You can either propose a completely new project to work on or either you can chose to work on already established projects.</p>
+<p>What I like about DRF, which makes it different from other framework is that it allows developers to define URL structure and not rely on an auto-generated one, while others automate much of the conversion from Django models to REST endpoints, thus are less flexible.</p>
 
-<p>Try to prepare your application as strong as possible. There is around 14-15 days for you to prepare your application and submit it to the organization. Start working and understanding what has been propsed in the appliation. Try to summarize yourself in a brief and an appropriate manner. Include all the things you have done with the organization, even include your past experience, if any. You can even refer to the senior developers, previous year GSoCers who could advice you to improve the application. Submit your application soon, do not wait for the last moment. One can have a look over the previous years proposals for refreneces.</p>
+<p>Moreover, Django REST Framework includes built-in API browser for testing out newly developed API.</p>
 
-<p>After submitting the propsal be patient for about a month, because results won’t be out before that. Continue contributing and even if you are not selected don’t get yourself disheartened, because <em><strong>there is always a second a chance</strong></em>, you just need to be optimistic.</p>
+<p>DRF provides a set of authentication policies out of the box (including <a href="http://www.django-rest-framework.org/api-guide/authentication#oauthauthentication">OAuth1a</a> and <a href="http://www.django-rest-framework.org/api-guide/authentication#oauth2authentication">OAuth2</a> and gives an opportunity to develop custom schemes.</p>
 
-<p>Hope these information might get you a start if you are willing to be a part of the prestigious GSoC.</p>
-
-<p>All the best and happy coding!! 🙂</p>
-
+<p>Still, I have to learn a lot of stuff in DRF I will keep posting whatever new and interesting things I learn  </p>
 
    
 <div id="disqus_thread"></div>
@@ -212,18 +195,18 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/api-and-django-rest-framework">
-            API and Django Rest Framework
-            <small>29 Jun 2017</small>
+          <a href="/django">
+            Django
+            <small>28 Jun 2017</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/django">
-            Django
-            <small>28 Jun 2017</small>
+          <a href="/gsoc-preparation">
+            All about GSoC
+            <small>09 Jun 2017</small>
           </a>
         </h3>
       </li>
