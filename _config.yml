@@ -13,6 +13,7 @@ disqus_baseurl: "https://Yathartha22.github.io/"
 disqus_shortname: https-yathartha22-github-io
 permalink: :title
 ga_tracking_id: "UA-82647777-1"
+excerpt_seperator: <!-break->
 
 
 # Build settings
