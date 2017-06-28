@@ -5,11 +5,12 @@ tagline: 'Open Source Enthusiast'
 subtitle: Learnings, Ramblings and Rants. In that order.
 email: yathartha32@gmail.com
 description: >
-  A personal website about technical things I find useful. Also, random ramblings and rants.
+  A personal website about technical things I find useful.
 baseurl: ""
 url: "https://Yathartha22.github.io/"
 github_username:  Yathartha22
 disqus_baseurl: "https://Yathartha22.github.io/"
+disqus_shortname: https-yathartha22-github-io
 permalink: :title
 ga_tracking_id: "UA-82647777-1"
 
@@ -43,6 +44,3 @@ gems:
   - jekyll-paginate
   - jemoji
   - jekyll-seo-tag
-
-exclude:
-  - "/vendor/"

@@ -7,7 +7,7 @@ tags: [ gsoc, open source, open source software ]
 
 ![](https://geekfeminismdotorg.files.wordpress.com/2016/02/gsoc2016logo.jpg)
  
-_What is GSoC, What it takes it to be a part of GSoC and everthing about GSoC._
+_What is GSoC, What it takes it to be a part of GSoC and everything about GSoC._
 
 GSoC is a platform which every student dreams of and I am one of those who really want to be a part.
 
