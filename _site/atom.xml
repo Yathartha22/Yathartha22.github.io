@@ -4,13 +4,28 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-06-29T12:09:12+05:30</updated>
+ <updated>2017-07-05T17:11:16+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Python Script to get NASA's APOD</title>
+   <link href="http://localhost:4000/nasa-wall-python-script"/>
+   <updated>2017-07-05T00:00:00+05:30</updated>
+   <id>http://localhost:4000/nasa-wall-python-script</id>
+   <content type="html">&lt;p&gt;I have always been worried about my desktop’s wallpaper. I find it a bit tedious to search the web for an image, download it and set it as my desktop’s wallpaper. So I thought to write a &lt;code class=&quot;highlighter-rouge&quot;&gt;python script&lt;/code&gt; that would do the job for me.&lt;/p&gt;
+
+&lt;p&gt;Being a bit enthusiast about space and astronomy, I thought to get wallpapers from NASA’s official site, and therefore I wrote the script. The script actually gets the wallpaper from &lt;code class=&quot;highlighter-rouge&quot;&gt;NASA's APOD(Astronomy Picture Of the Day)&lt;/code&gt; and sets it as your desktop wallpaper. So here is my github link to the script.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Yathartha22/nasa&quot;&gt;NASA APOD script&lt;/a&gt;. Currently it works on Linux OS, I will try to make it platform independent.&lt;/p&gt;
+
+&lt;p&gt;Till then enjoy with amazing and cool space pics from NASA 😃&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>API and Django Rest Framework</title>
