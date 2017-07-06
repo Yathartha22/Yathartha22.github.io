@@ -4,7 +4,7 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-07-05T17:11:16+05:30</updated>
+ <updated>2017-07-06T12:04:10+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
@@ -92,7 +92,7 @@ Not going into much detail what MVC or MTV is, just know that Django’s View is
 
 &lt;p&gt;That was a bit of an introduction to what actually &lt;em&gt;Django&lt;/em&gt; is. The reason why I chose Django was that I was involved with Python(coding as well as open source) for quite a time so I thought why not try Python in web development, so I started with Django.&lt;/p&gt;
 
-&lt;p&gt;What I like the most about Django, is we can actually create dynamic websites really fast, you don’t need to worry about most things, you just define your data model and off you go. With Django, you can take Web applications from concept to launch in a matter of hours. Django takes care of much of the hassle of Web development so you can focus on writing your app without needing to reinvent the wheel. Another thing that I appreciate and like is Django’s community and resources. It has a huge community ready to help anytime. Django’s open source community Also it has it’s resources are properly documented.Django’s documentation&lt;/p&gt;
+&lt;p&gt;What I like the most about Django, is we can actually create dynamic websites really fast, you don’t need to worry about most things, you just define your data model and off you go. With Django, you can take Web applications from concept to launch in a matter of hours. Django takes care of much of the hassle of Web development so you can focus on writing your app without needing to reinvent the wheel. Another thing that I appreciate and like is Django’s community and resources. It has a huge community ready to help anytime &lt;a href=&quot;https://github.com/django/django&quot;&gt;Django’s open source community&lt;/a&gt;. Also it has it’s resources are properly documented &lt;a href=&quot;https://docs.djangoproject.com/en/1.11/&quot;&gt;Django’s documentation&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Why Django?&lt;/strong&gt;&lt;/p&gt;
 
@@ -120,9 +120,24 @@ Not going into much detail what MVC or MTV is, just know that Django’s View is
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Incredibly versatile&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;em&gt;Companies, organizations and governments have used Django to build all sorts of things — from content management systems to social networks   to scientific computing platforms.&lt;/em&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Companies, organizations and governments have used Django to build all sorts of things — from content management systems to social networks  to scientific computing platforms.&lt;/em&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;Follwing are the well known sites built using &lt;code class=&quot;highlighter-rouge&quot;&gt;Django&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.userlogos.org/files/logos/motoko-chan/bitbucket.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 130px; height=200px;&quot; /&gt;
+&lt;img src=&quot;http://1000logos.net/wp-content/uploads/2017/02/Instagram-app-logo.jpg&quot; alt=&quot;Drawing&quot; style=&quot;width: 100px;&quot; /&gt;
+&lt;img src=&quot;http://ffp4g1ylyit3jdyti1hqcvtb-wpengine.netdna-ssl.com/opendesign/files/2017/01/Mozilla-12jan-1500px_logo.jpg&quot; alt=&quot;Drawing&quot; style=&quot;width:100px;&quot; /&gt;
+&lt;img src=&quot;https://s-media-cache-ak0.pinimg.com/736x/88/8c/5e/888c5e49ac44fc34f572986c7b9d18c0--pinterest-logo-png-pinterest-account.jpg&quot; alt=&quot;Drawing&quot; style=&quot;width: 100px;&quot; /&gt;
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 100px;&quot; /&gt;
+&lt;img src=&quot;https://assets2.onionstatic.com/onion/static/images/onion_fb_placeholder.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 160px;&quot; /&gt;
+&lt;img src=&quot;http://www.russellheimlich.com/blog/wp-content/uploads/2007/05/mahalo_logo.gif&quot; alt=&quot;Drawing&quot; style=&quot;width: 100px;&quot; /&gt;
+&lt;img src=&quot;http://www.logcabin.org/wp-content/uploads/2013/09/Washington-Post-Logo.jpg&quot; alt=&quot;Drawing&quot; style=&quot;width: 170px;&quot; /&gt;
+&lt;img src=&quot;http://www.underconsideration.com/brandnew/archives/eventbrite_logo.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 150px;&quot; /&gt;
+&lt;img src=&quot;https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/112013/disqus-logo-blue-white.png?itok=UwOSMzby&quot; alt=&quot;Drawing&quot; style=&quot;width: 90px;height=80px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For more details you can have a look &lt;a href=&quot;https://www.linkedin.com/pulse/top-10-sites-built-django-framework-vladimir-bogdanov&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I think if you are a &lt;em&gt;Python&lt;/em&gt; lover you should give &lt;em&gt;Django&lt;/em&gt; a try…!!  I will come up with more experiences with Django, till then All the best 👍 and Happy coding 😃&lt;/p&gt;
 
