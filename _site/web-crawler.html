@@ -11,7 +11,7 @@
 
   <title>
     
-      Python Script to get NASA's APOD &middot; Yathartha Joshi
+      Web Crawlers and Web Crawling &middot; Yathartha Joshi
     
   </title>
 
@@ -131,15 +131,76 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Python Script to get NASA's APOD</h1>
-  <span class="post-date">05 Jul 2017</span>
-   <p>I have always been worried about my desktop’s wallpaper. I find it a bit tedious to search the web for an image, download it and set it as my desktop’s wallpaper. So I thought to write a <code class="highlighter-rouge">python script</code> that would do the job for me.</p>
+  <h1 class="post-title">Web Crawlers and Web Crawling</h1>
+  <span class="post-date">07 Jul 2017</span>
+   <p><img src="/public/web-crawlers.jpg" style="width:30%;height:30%" /></p>
 
-<p>Being a bit enthusiast about space and astronomy, I thought to get wallpapers from NASA’s official site, and therefore I wrote the script. The script actually gets the wallpaper from <code class="highlighter-rouge">NASA's APOD(Astronomy Picture Of the Day)</code> and sets it as your desktop wallpaper. So here is my github link to the script.</p>
+<p>Ever wondered how a search engine comes up with the exact results when you type something in its query box? After all, there are trillions of results matching your search query. A fascinating process is at work behind it. It is the <strong>Web Crawler</strong> that is responsible for accomplishing the task. So what is a <code class="highlighter-rouge">web crawler</code>, what it does and how it does, I will try to answer all these.</p>
 
-<p><a href="https://github.com/Yathartha22/nasa">NASA APOD script</a>. Currently it works on Linux OS, I will try to make it platform independent.</p>
+<p><strong>What is a Web Crawler</strong></p>
 
-<p>Till then enjoy with amazing and cool space pics from NASA 😃</p>
+<blockquote>
+  <p><em>Web Crawler</em> or simply a <em>Crawler</em> is a program that acts as an automated script which browses through the internet in a systematic way.</p>
+</blockquote>
+
+<p>Web Crawlers are also known as <code class="highlighter-rouge">Spiders</code>, <code class="highlighter-rouge">Robot</code>, <code class="highlighter-rouge">SearchBot</code> or simply <code class="highlighter-rouge">Bot</code>. Web crawlers are one of the most common used systems now-a-days. The most popular example is that <em>Google</em> is using crawlers to collect information from all websites.</p>
+
+<p>A <code class="highlighter-rouge">Search Engine Spider</code> is a program that most search engines use to find what’s new on the Internet. The crawler looks at the keywords in the pages, the kind of content each page has and the links, before returning the information to the search engine. This process is known as <code class="highlighter-rouge">Web crawling</code>.</p>
+
+<p>Besides search engine, news websites need crawlers to aggregate data sources. It seems that whenever you want to aggregate a large amount of information, you may consider using crawlers.</p>
+
+<p><strong>Why is Web Crawling Important</strong></p>
+
+<p>Let me make you understand with an example to show why web crawling is important.</p>
+
+<p>Data lies in the heart of any business, even more if its tech related. With all the open standards of today like RSS feeds or APIs sharing data across systems have become relatively easier.</p>
+
+<p>For example, if you want to read today’s financial news directly from your email inbox, you could simply subscribe to the provider’s (like Google News or BBC) RSS feed. Similarly, your system or application could also use a provider’s API to get upto date information.
+But what about data that is unstructured or does not have RSS feeds for you to consume? How will you go about fetching them?</p>
+
+<p>Let’s consider another simple example. Suppose you have a shopping site and have 1000 products. You want to make sure your prices are competitive. In order to do that, you will need to monitor your competitors’ sites and their prices for the same products. If there are a lot of products and lot of competitors it is going to be very difficult to do this without some automated process.</p>
+
+<p>This is where <code class="highlighter-rouge">Web Crawling</code> comes into picture.</p>
+
+<p><code class="highlighter-rouge">Web Crawling</code> technology was made popular by Google for its use in their search. They were the first to see the importance of immense amount of data on the web which was then not crawled and indexed. They capitalized on that – sent out thousands of crawlers to the web and indexed everything they could possibly find!</p>
+
+<p>To sum up let’s get few points summarized as to why web crawling is important:</p>
+
+<ul>
+  <li>
+    <p>Gather data for business intelligence.</p>
+  </li>
+  <li>
+    <p>Market research about the product or service you are offering.</p>
+  </li>
+  <li>
+    <p>Monitor competitor’s product or solution 24/7.</p>
+  </li>
+  <li>
+    <p>Gather user behavior data to make your product perform better.</p>
+  </li>
+</ul>
+
+<p><strong>How does a Web Crawler work</strong></p>
+
+<p>In short as explained by <a href="https://support.google.com/webmasters/answer/70897?hl=en">Google</a> on how Google Search works, for web crawling procedure there are mainly three steps:</p>
+
+<ul>
+  <li>First, the search bot starts by crawling the pages of your site(<strong>Crawling</strong>).</li>
+  <li>Then it continues indexing the words and content of the site(<strong>Indexing</strong>), and</li>
+  <li>finally it visit the links (web page addresses or URLs) that are found in your site.</li>
+</ul>
+
+<p>To control the way a spider looks to your website is by using a <strong>robots.txt</strong> file. The first thing a spider is supposed to do when it visits your website is look for a file called <em>robots.txt</em>. This file contains instructions for the spider on which parts of the website to index, and which parts to ignore.</p>
+
+<p>Another piece of information I would share is the following answer in <strong>Quora</strong>, when asked</p>
+
+<p><strong><em>What are some ideas of how a startup can use web crawler scripts to drive growth?</em></strong></p>
+
+<p><img src="/public/quora-web-crawler-answer.png" style="height=30%" /></p>
+
+<p>This was just an idea about <code class="highlighter-rouge">web crawlers</code> and <code class="highlighter-rouge">web crawling</code>. Hope, this might help you to get started with crawlers. Till then All the Best 👍 and Happy Coding 😃</p>
+
 
    
 <div id="disqus_thread"></div>
@@ -165,9 +226,9 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/web-crawler">
-            Web Crawlers and Web Crawling
-            <small>07 Jul 2017</small>
+          <a href="/nasa-wall-python-script">
+            Python Script to get NASA's APOD
+            <small>05 Jul 2017</small>
           </a>
         </h3>
       </li>
