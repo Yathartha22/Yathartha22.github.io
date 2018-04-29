@@ -4,13 +4,50 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-08-29T12:50:50+05:30</updated>
+ <updated>2018-04-29T12:24:59+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Got Selectd in GSoC</title>
+   <link href="http://localhost:4000/gsoc-selection"/>
+   <updated>2018-04-29T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-selection</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/public/gsoc.png&quot; style=&quot;width:30%;height:30%;float:left;&quot; /&gt;
+&lt;img src=&quot;/public/sympy.png&quot; style=&quot;width:25%;height:25%;float:right;margin-right:100px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+Sorry for the late post!!&lt;/p&gt;
+
+&lt;p&gt;The results of &lt;strong&gt;&lt;a href=&quot;https://summerofcode.withgoogle.com/organizations/5583344046178304/#6097058637807616&quot;&gt;Google Summer of Code&lt;/a&gt;&lt;/strong&gt; were out on 23 April 2018 and guess what I got selected and will be working under &lt;strong&gt;&lt;a href=&quot;http://sympy.org&quot;&gt;Sympy&lt;/a&gt;&lt;/strong&gt; for the next 3 months. I will be working on my project, &lt;a href=&quot;https://docs.google.com/document/d/1kcZCdQuY3XxgHPuSA8vvwc6O8AbVZ-nYskMuXIia9hA/edit?usp=sharing&quot;&gt;Solvers: Completing Solvers&lt;/a&gt;, during this period. I am really excited to work with such an amazing organization. I would like to thank all the mentors especially &lt;a href=&quot;https://github.com/asmeurer&quot;&gt;Aaron Meurer&lt;/a&gt;, &lt;a href=&quot;https://github.com/smichr&quot;&gt;Christopher Smith&lt;/a&gt;, &lt;a href=&quot;https://github.com/aktech&quot;&gt;Amit Kumar&lt;/a&gt; and &lt;a href=&quot;https://github.com/jksuom&quot;&gt;Kalevi Suominen&lt;/a&gt; for guiding me in my proposal and PR’s. My official mentor will be &lt;strong&gt;Amit Kumar&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first phase is the &lt;em&gt;Community Bonding Period&lt;/em&gt;, I will focussing on the following things before the coding period begans.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Setting up blog and synchronizing it with planet sympy.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Discussing possible means of communication, weekly meetings etc.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Planning the implementation of the project with Amit.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Familiarizing with the codebase of Sympy and see how it may help solving the problems while implementing the project.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will be having my end sems and practicals during this period but I will try to accomplish the above tasks whenever I get time.&lt;/p&gt;
+
+&lt;p&gt;Looking forward for a wonderful summer ahead 😄	!!&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Web Crawlers and Web Crawling</title>
