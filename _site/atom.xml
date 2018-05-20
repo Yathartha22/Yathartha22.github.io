@@ -4,13 +4,55 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-04-29T12:24:59+05:30</updated>
+ <updated>2018-05-20T13:29:08+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 1 - Starting up</title>
+   <link href="http://localhost:4000/gsoc-week-1"/>
+   <updated>2018-05-20T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-1</id>
+   <content type="html">&lt;p&gt;So the coding period started from 14 May 2018. So most of the days of the first week I spent was giving final exams and travelling. But now everything is over and I will be spending most of the time implementing what I have proposed for the first evaluations. I had a meeting with Amit during the community bonding period where we discussed :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Schedule and frequency of meetings.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to proceed with implementing transolve, documenting and writing tests for it.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As of now I have looked few things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve&lt;/code&gt; works in &lt;code class=&quot;highlighter-rouge&quot;&gt;solve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How exponential and logarithmic equations are solved.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Filtering out the tests for the above.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Figuring out how the API would look like.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What will be the flow of &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The last two points needs more discussions and planning. In the coming week I will try to figure it out by dicussing it with Amit and by the end I will try to make an initial commit to &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hope I execute the plan well!!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Got Selectd in GSoC</title>
@@ -23,7 +65,7 @@
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
 Sorry for the late post!!&lt;/p&gt;
 
-&lt;p&gt;The results of &lt;strong&gt;&lt;a href=&quot;https://summerofcode.withgoogle.com/organizations/5583344046178304/#6097058637807616&quot;&gt;Google Summer of Code&lt;/a&gt;&lt;/strong&gt; were out on 23 April 2018 and guess what I got selected and will be working under &lt;strong&gt;&lt;a href=&quot;http://sympy.org&quot;&gt;Sympy&lt;/a&gt;&lt;/strong&gt; for the next 3 months. I will be working on my project, &lt;a href=&quot;https://docs.google.com/document/d/1kcZCdQuY3XxgHPuSA8vvwc6O8AbVZ-nYskMuXIia9hA/edit?usp=sharing&quot;&gt;Solvers: Completing Solvers&lt;/a&gt;, during this period. I am really excited to work with such an amazing organization. I would like to thank all the mentors especially &lt;a href=&quot;https://github.com/asmeurer&quot;&gt;Aaron Meurer&lt;/a&gt;, &lt;a href=&quot;https://github.com/smichr&quot;&gt;Christopher Smith&lt;/a&gt;, &lt;a href=&quot;https://github.com/aktech&quot;&gt;Amit Kumar&lt;/a&gt; and &lt;a href=&quot;https://github.com/jksuom&quot;&gt;Kalevi Suominen&lt;/a&gt; for guiding me in my proposal and PR’s. My official mentor will be &lt;strong&gt;Amit Kumar&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The results of &lt;strong&gt;&lt;a href=&quot;https://summerofcode.withgoogle.com/organizations/5583344046178304/#6097058637807616&quot;&gt;Google Summer of Code&lt;/a&gt;&lt;/strong&gt; were out on 23 April 2018 and guess what I got selected and will be working under &lt;strong&gt;&lt;a href=&quot;http://sympy.org&quot;&gt;Sympy&lt;/a&gt;&lt;/strong&gt; for the next 3 months. I will be working on my project, &lt;a href=&quot;https://docs.google.com/document/d/1kcZCdQuY3XxgHPuSA8vvwc6O8AbVZ-nYskMuXIia9hA/edit?usp=sharing&quot;&gt;Solvers: Completing Solveset&lt;/a&gt;, during this period. I am really excited to work with such an amazing organization. I would like to thank all the mentors especially &lt;a href=&quot;https://github.com/asmeurer&quot;&gt;Aaron Meurer&lt;/a&gt;, &lt;a href=&quot;https://github.com/smichr&quot;&gt;Christopher Smith&lt;/a&gt;, &lt;a href=&quot;https://github.com/aktech&quot;&gt;Amit Kumar&lt;/a&gt; and &lt;a href=&quot;https://github.com/jksuom&quot;&gt;Kalevi Suominen&lt;/a&gt; for guiding me in my proposal and PR’s. My official mentor will be &lt;strong&gt;Amit Kumar&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;The first phase is the &lt;em&gt;Community Bonding Period&lt;/em&gt;, I will focussing on the following things before the coding period begans.&lt;/p&gt;
 
