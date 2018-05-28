@@ -4,13 +4,65 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-20T13:41:36+05:30</updated>
+ <updated>2018-05-28T10:25:53+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 2 - Getting started with transolve</title>
+   <link href="http://localhost:4000/gsoc-week-2"/>
+   <updated>2018-05-27T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-2</id>
+   <content type="html">&lt;p&gt;So this is the end of the second week of GSoC and I am still working on implementing and improving &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;. In the previous week Amit and I discussed about the things that are necessary for implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;. I have covered it in the previous &lt;a href=&quot;https://yathartha22.github.io//gsoc-week-1&quot;&gt;blog post&lt;/a&gt;. Based on the discussions I have a submitted a WIP PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the second meeting we had &lt;a href=&quot;https://github.com/hargup&quot;&gt;Harsh&lt;/a&gt; joining us to the discussion.&lt;/p&gt;
+
+&lt;p&gt;Amit and Harsh stressed on making transolve modular and extensilbe, unlike &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve&lt;/code&gt; which lacks these features (though it is very powerful).&lt;/p&gt;
+
+&lt;p&gt;So there are few things that &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; should have:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Proper documentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Documentation is always a very important aspect of any software. Therefore to make it easy to understand to the users, transolve needs to have a proper descriptive documentation that should explain why, what and how of transolve. Amit suggested on covering every detail of the working of function. It should cover the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- What is transolve.
+- How to use transolve.
+- Why it is better than `_tsolve`.
+- How equations are solved.
+- How to add a new class of equations.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Extensibility&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; should be extensible, i.e. the design of the API should be such that it becomes easy to add a new class of equation solver without affecting the structure of the function.
+The idea to make this happen is to have a two step procedure of equation solving. &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; will solve any equation by first identifying the class of the equations (a helper will do that) and then calling another helper to solve that equation. So in this way one needs to figure out how to identify the equation and how to solve it. Once this is done he just needs to invoke the helpers at the proper location in transolve.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Modularity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As it is clear from the above point, &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; will have two step procedure for solving different classes of equations. Helper function needs to be implemented for identification and solving equations. This will make &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; modular as solving equations will not depend on the main function.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Proof of correctness&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since identification and solving equations will be achieved with few heuristics/algorithms. There should be a proper document of its prof of correctness. I will be adding proper documentation with examples explaining its authenticity.&lt;/p&gt;
+
+&lt;p&gt;Apart from this Amit also adviced on reading documentation of &lt;a href=&quot;https://github.com/sympy/sympy/blob/master/sympy/solvers/ode.py&quot;&gt;ode&lt;/a&gt; module so as to get an idea, also importing tests from solve, making it atleast as powerful as _tsolve will be other things that needs care.&lt;/p&gt;
+
+&lt;p&gt;I will be focussing on completing it by this week!!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 1 - Starting up</title>

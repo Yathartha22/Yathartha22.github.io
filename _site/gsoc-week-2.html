@@ -11,7 +11,7 @@
 
   <title>
     
-      Django &middot; Yathartha Joshi
+      GSoC 2018 - Week 2 - Getting started with transolve &middot; Yathartha Joshi
     
 
   </title>
@@ -139,72 +139,52 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Django</h1>
-  <span class="post-date">28 Jun 2017</span>
-   <p><img src="/public/django.png" alt="" /></p>
+  <h1 class="post-title">GSoC 2018 - Week 2 - Getting started with transolve</h1>
+  <span class="post-date">27 May 2018</span>
+   <p>So this is the end of the second week of GSoC and I am still working on implementing and improving <code class="highlighter-rouge">transolve</code>. In the previous week Amit and I discussed about the things that are necessary for implementing <code class="highlighter-rouge">transolve</code>. I have covered it in the previous <a href="https://yathartha22.github.io//gsoc-week-1">blog post</a>. Based on the discussions I have a submitted a WIP PR <a href="https://github.com/sympy/sympy/pull/14736">here</a>.</p>
 
-<p>Well, it’s been a long time that I haven’t written about anything. So I thought to write about what I am learning for the past few days <strong>Django</strong>.</p>
+<p>In the second meeting we had <a href="https://github.com/hargup">Harsh</a> joining us to the discussion.</p>
 
-<p>I will get started with the definition first</p>
+<p>Amit and Harsh stressed on making transolve modular and extensilbe, unlike <code class="highlighter-rouge">_tsolve</code> which lacks these features (though it is very powerful).</p>
 
-<blockquote>
-  <p><em>Django is a high level python web framework. It is free and open source, written in python.</em></p>
-</blockquote>
-
-<p>Like any other framework, Django also supports MVC(<strong>M</strong>odel <strong>V</strong>iew <strong>C</strong>ontroller) pattern. It follows MVC closely, however, it does use its own logic in the implementation. Because the “C(<strong>C</strong>ontroller)” is handled by the framework itself and most of the excitement in Django happens in models, templates and views, Django is often referred to as an MTV(<strong>M</strong>odel <strong>T</strong>emplate <strong>V</strong>iew) framework.
-Not going into much detail what MVC or MTV is, just know that Django’s View is more like the Controller in MVC, and MVC’s View is actually a Template in Django. Therefore the name MTV.</p>
-
-<p>That was a bit of an introduction to what actually <em>Django</em> is. The reason why I chose Django was that I was involved with Python(coding as well as open source) for quite a time so I thought why not try Python in web development, so I started with Django.</p>
-
-<p>What I like the most about Django, is we can actually create dynamic websites really fast, you don’t need to worry about most things, you just define your data model and off you go. With Django, you can take Web applications from concept to launch in a matter of hours. Django takes care of much of the hassle of Web development so you can focus on writing your app without needing to reinvent the wheel. Another thing that I appreciate and like is Django’s community and resources. It has a huge community ready to help anytime <a href="https://github.com/django/django">Django’s open source community</a>. Also it has it’s resources are properly documented <a href="https://docs.djangoproject.com/en/1.11/">Django’s documentation</a>.</p>
-
-<p><strong>Why Django?</strong></p>
+<p>So there are few things that <code class="highlighter-rouge">transolve</code> should have:</p>
 
 <ul>
-  <li>
-    <p><strong>Ridiculously fast</strong></p>
-
-    <p><em>Django is designed to help developers take applications from concept to completion as quickly as possible.</em></p>
-  </li>
-  <li>
-    <p><strong>Fully loaded</strong></p>
-
-    <p><em>Django includes dozens of extras you can use to handle common Web development tasks. Django takes care of user authentication, content       administration, site maps, RSS feeds, and many more tasks — right out of the box.</em></p>
-  </li>
-  <li>
-    <p><strong>Reassuringly secure</strong></p>
-
-    <p><em>Django takes security seriously and helps developers avoid many common security mistakes, such as SQL injection, cross-site scripting, cross-site request forgery and clickjacking. Its user authentication system provides a secure way to manage user accounts and passwords.</em></p>
-  </li>
-  <li>
-    <p><strong>Exceedingly scalable</strong></p>
-
-    <p><em>Some of the busiest sites on the planet use Django’s ability to quickly and flexibly scale to meet the heaviest traffic demands.</em></p>
-  </li>
-  <li>
-    <p><strong>Incredibly versatile</strong></p>
-
-    <p><em>Companies, organizations and governments have used Django to build all sorts of things — from content management systems to social networks  to scientific computing platforms.</em></p>
-  </li>
+  <li>Proper documentation</li>
 </ul>
 
-<p>Follwing are the well known sites built using <code class="highlighter-rouge">Django</code></p>
+<p>Documentation is always a very important aspect of any software. Therefore to make it easy to understand to the users, transolve needs to have a proper descriptive documentation that should explain why, what and how of transolve. Amit suggested on covering every detail of the working of function. It should cover the following:</p>
 
-<p><img src="http://www.userlogos.org/files/logos/motoko-chan/bitbucket.png" alt="Drawing" style="width: 130px; height=200px;" />
-<img src="http://1000logos.net/wp-content/uploads/2017/02/Instagram-app-logo.jpg" alt="Drawing" style="width: 100px;" />
-<img src="http://ffp4g1ylyit3jdyti1hqcvtb-wpengine.netdna-ssl.com/opendesign/files/2017/01/Mozilla-12jan-1500px_logo.jpg" alt="Drawing" style="width:100px;" />
-<img src="https://s-media-cache-ak0.pinimg.com/736x/88/8c/5e/888c5e49ac44fc34f572986c7b9d18c0--pinterest-logo-png-pinterest-account.jpg" alt="Drawing" style="width: 100px;" />
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" alt="Drawing" style="width: 100px;" />
-<img src="https://assets2.onionstatic.com/onion/static/images/onion_fb_placeholder.png" alt="Drawing" style="width: 160px;" />
-<img src="http://www.russellheimlich.com/blog/wp-content/uploads/2007/05/mahalo_logo.gif" alt="Drawing" style="width: 100px;" />
-<img src="http://www.logcabin.org/wp-content/uploads/2013/09/Washington-Post-Logo.jpg" alt="Drawing" style="width: 170px;" />
-<img src="http://www.underconsideration.com/brandnew/archives/eventbrite_logo.png" alt="Drawing" style="width: 150px;" />
-<img src="https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/112013/disqus-logo-blue-white.png?itok=UwOSMzby" alt="Drawing" style="width: 90px;height=80px;" /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>- What is transolve.
+- How to use transolve.
+- Why it is better than `_tsolve`.
+- How equations are solved.
+- How to add a new class of equations.
+</code></pre>
+</div>
 
-<p>For more details you can have a look <a href="https://www.linkedin.com/pulse/top-10-sites-built-django-framework-vladimir-bogdanov">here</a>.</p>
+<ul>
+  <li>Extensibility</li>
+</ul>
 
-<p>I think if you are a <em>Python</em> lover you should give <em>Django</em> a try…!!  I will come up with more experiences with Django, till then All the best 👍 and Happy coding 😃</p>
+<p><code class="highlighter-rouge">transolve</code> should be extensible, i.e. the design of the API should be such that it becomes easy to add a new class of equation solver without affecting the structure of the function.
+The idea to make this happen is to have a two step procedure of equation solving. <code class="highlighter-rouge">transolve</code> will solve any equation by first identifying the class of the equations (a helper will do that) and then calling another helper to solve that equation. So in this way one needs to figure out how to identify the equation and how to solve it. Once this is done he just needs to invoke the helpers at the proper location in transolve.</p>
 
+<ul>
+  <li>Modularity</li>
+</ul>
+
+<p>As it is clear from the above point, <code class="highlighter-rouge">transolve</code> will have two step procedure for solving different classes of equations. Helper function needs to be implemented for identification and solving equations. This will make <code class="highlighter-rouge">transolve</code> modular as solving equations will not depend on the main function.</p>
+
+<ul>
+  <li>Proof of correctness</li>
+</ul>
+
+<p>Since identification and solving equations will be achieved with few heuristics/algorithms. There should be a proper document of its prof of correctness. I will be adding proper documentation with examples explaining its authenticity.</p>
+
+<p>Apart from this Amit also adviced on reading documentation of <a href="https://github.com/sympy/sympy/blob/master/sympy/solvers/ode.py">ode</a> module so as to get an idea, also importing tests from solve, making it atleast as powerful as _tsolve will be other things that needs care.</p>
+
+<p>I will be focussing on completing it by this week!!</p>
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -234,15 +214,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-2">
-            GSoC 2018 - Week 2 - Getting started with transolve
-            <small>27 May 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-1">
             GSoC 2018 - Week 1 - Starting up
             <small>20 May 2018</small>
@@ -255,6 +226,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-selection">
             Got Selectd in GSoC
             <small>29 Apr 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/web-crawler">
+            Web Crawlers and Web Crawling
+            <small>07 Jul 2017</small>
           </a>
         </h3>
       </li>
