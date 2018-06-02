@@ -4,13 +4,38 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-28T10:25:53+05:30</updated>
+ <updated>2018-06-02T16:03:04+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 3 - Continuing with transolve</title>
+   <link href="http://localhost:4000/gsoc-week-3"/>
+   <updated>2018-06-02T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-3</id>
+   <content type="html">&lt;p&gt;I continued my work of week 2 in this week as well. Though I was travelling for 2-3 days, I was able to give most of the hours to the work dedicated for this week. I had to add a detailed descriptive documentation for &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;, for this I read documentation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;ode&lt;/code&gt; module as Amit and Harsh suggested, apart from this I read several other documentation of sympy modules. Made a commit regarding this in the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As of now transolve supports solving majority of exponential equations.
+I have also imported exponential tests of solve and added a few of mine. Some of them needs another look, I have added them to &lt;code class=&quot;highlighter-rouge&quot;&gt;XFAIL&lt;/code&gt; as of now. I am working on these tests to pass. Also done minor changes in the function, like removed &lt;code class=&quot;highlighter-rouge&quot;&gt;force=True&lt;/code&gt; option from &lt;code class=&quot;highlighter-rouge&quot;&gt;expand_log&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is simple, we are mainly focusing on making it modular and extensible. So to achieve this different identifying and solving helpers will be implemented that will identify the type of equation and then solve it. For detailed information refer to the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;exponential solver&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Exponential equations are solved by using logarithms. Currently the &lt;code class=&quot;highlighter-rouge&quot;&gt;expo_solver&lt;/code&gt; reduces the equation to log form which can further be handled by solveset itself. For this purpose &lt;a href=&quot;http://docs.sympy.org/latest/tutorial/simplification.html#expand-log&quot;&gt;expand_log&lt;/a&gt; function of sympy is used which reduces the equation using log identities.
+Take for example a simple exponential equation &lt;code class=&quot;highlighter-rouge&quot;&gt;3**(2*x) - 2**(x + 3)&lt;/code&gt;, this equation can be reduced to &lt;code class=&quot;highlighter-rouge&quot;&gt;2*x*log(3) - (x+3)*log(2)&lt;/code&gt;, this type of equation is easily solvable by &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once we approve on the documentation and the working of exponential solver I will proceed to implement logarithmic solver (probably in the coming week).&lt;/p&gt;
+
+&lt;p&gt;Hope things go as planned!!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 2 - Getting started with transolve</title>
