@@ -4,13 +4,65 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-06-02T16:03:04+05:30</updated>
+ <updated>2018-06-09T11:41:13+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 4 - Continuing with transolve Part-II</title>
+   <link href="http://localhost:4000/gsoc-week-4"/>
+   <updated>2018-06-09T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-4</id>
+   <content type="html">&lt;p&gt;By the end of the previous week I had completed majority of the TODO’s of the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR #14736&lt;/a&gt;.
+This week I started on minor improvements suggested by Amit. This included:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Minor Documentation changes&lt;br /&gt;
+Included proof of correctness, typo fixes, rephrasing lines etc.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Removing &lt;code class=&quot;highlighter-rouge&quot;&gt;flag&lt;/code&gt; variable from transolve.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;flag&lt;/code&gt; variable was passed as a function parameter in &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; and was used to check on the recursive call. The thought was that there might be a case when equation could not be solved by any of the helpers but during the process the equation might get modified, so we wanted to double check whether the modified equation could be solved again, thats why we used &lt;code class=&quot;highlighter-rouge&quot;&gt;flag&lt;/code&gt; but Amit suggested on removing it as there wasn’t a case as of now and it will only make things unnecessarily complicated.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Also worked on XFAILS, mainly on solving equations containing only symbols. There was an exception raised in &lt;code class=&quot;highlighter-rouge&quot;&gt;_invert_real&lt;/code&gt;, because of a relational comparison made with &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; which caused the faiure of the tests. It has been fixed by handling the exception.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Imported tests of log and lambert.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Another thing we discussed was about log solver. The helpers for solving logarithmic equations will be implemented in a seperated PR, to make the review and implementing task easy and independent.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After this I started a working on solving exponential equations in complex domain, though it turns out that we will be focussing on only the real domain as of now. But I have added tests for it as XFAIL.&lt;br /&gt;
+To make exponents work in complex domain, we require the &lt;a href=&quot;https://en.wikipedia.org/wiki/Complex_logarithm&quot;&gt;complex logarithm&lt;/a&gt;.
+If we have equation as&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	z = e**w,
+	where w is complex number and z is non-zero complex number,
+	then 
+	Ln(z) = ln|z| + I*(Arg(z) + 2*n*pi)
+	where Ln(z) is the complex logarithm and ln|z| is the
+        logarithm evaluated with real number argument.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Apart from this we also had a meeting yesterday in which we discussed about how we will be wrapping up things before the first evaluation.&lt;br /&gt;
+I will be completing few leftovers of the current PR to make it merge and start working on implementing log solver (making a commit probably by tomorrow).&lt;/p&gt;
+
+&lt;p&gt;Amit also suggested on creating a coverage report so as to get an idea about the amount of tests covered by the code. The current coverage report can be found &lt;a href=&quot;/covhtml/sympy_solvers_solveset_py.html&quot;&gt;here&lt;/a&gt;. Other than this he also advised on reading &lt;a href=&quot;https://www.investigatii.md/uploads/resurse/Clean_Code.pdf&quot;&gt;Clean Code&lt;/a&gt; by &lt;code class=&quot;highlighter-rouge&quot;&gt;Robert C. Martin&lt;/code&gt; which will help me improve in writing clean and efficient code.&lt;/p&gt;
+
+&lt;p&gt;The main target for the coming week will be merging &lt;code class=&quot;highlighter-rouge&quot;&gt;PR #14736&lt;/code&gt;, implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt; (will try to merge this as well), starting with implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert solver&lt;/code&gt; (try to add atleast a WIP PR) and reading the book.&lt;/p&gt;
+
+&lt;p&gt;Hope things go as planned!!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 3 - Continuing with transolve</title>
@@ -20,7 +72,7 @@
    <content type="html">&lt;p&gt;I continued my work of week 2 in this week as well. Though I was travelling for 2-3 days, I was able to give most of the hours to the work dedicated for this week. I had to add a detailed descriptive documentation for &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;, for this I read documentation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;ode&lt;/code&gt; module as Amit and Harsh suggested, apart from this I read several other documentation of sympy modules. Made a commit regarding this in the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;As of now transolve supports solving majority of exponential equations.
-I have also imported exponential tests of solve and added a few of mine. Some of them needs another look, I have added them to &lt;code class=&quot;highlighter-rouge&quot;&gt;XFAIL&lt;/code&gt; as of now. I am working on these tests to pass. Also done minor changes in the function, like removed &lt;code class=&quot;highlighter-rouge&quot;&gt;force=True&lt;/code&gt; option from &lt;code class=&quot;highlighter-rouge&quot;&gt;expand_log&lt;/code&gt;.&lt;/p&gt;
+I have also imported exponential tests of solve and added a few of mine. Some of them needs another look, I have added them to &lt;code class=&quot;highlighter-rouge&quot;&gt;XFAIL&lt;/code&gt; as of now. I am working on these tests to pass. Also done minor changes in the function, like removed &lt;code class=&quot;highlighter-rouge&quot;&gt;force=True&lt;/code&gt; option from &lt;code class=&quot;highlighter-rouge&quot;&gt;expand_log&lt;/code&gt; because using this option is not a healthy choice as the function expands logarithm without considering the assumptions (for exponents the variable should be real) which may sometime get a wrong result.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 

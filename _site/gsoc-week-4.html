@@ -11,7 +11,7 @@
 
   <title>
     
-      Python Script to get NASA's APOD &middot; Yathartha Joshi
+      GSoC 2018 - Week 4 - Continuing with transolve Part-II &middot; Yathartha Joshi
     
 
   </title>
@@ -139,15 +139,52 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Python Script to get NASA's APOD</h1>
-  <span class="post-date">05 Jul 2017</span>
-   <p>I have always been worried about my desktop’s wallpaper. I find it a bit tedious to search the web for an image, download it and set it as my desktop’s wallpaper. So I thought to write a <code class="highlighter-rouge">python script</code> that would do the job for me.</p>
+  <h1 class="post-title">GSoC 2018 - Week 4 - Continuing with transolve Part-II</h1>
+  <span class="post-date">09 Jun 2018</span>
+   <p>By the end of the previous week I had completed majority of the TODO’s of the <a href="https://github.com/sympy/sympy/pull/14736/">PR #14736</a>.
+This week I started on minor improvements suggested by Amit. This included:</p>
 
-<p>Being a bit enthusiast about space and astronomy, I thought to get wallpapers from NASA’s official site, and therefore I wrote the script. The script actually gets the wallpaper from <code class="highlighter-rouge">NASA's APOD(Astronomy Picture Of the Day)</code> and sets it as your desktop wallpaper. So here is my github link to the script.</p>
+<ul>
+  <li>
+    <p>Minor Documentation changes<br />
+Included proof of correctness, typo fixes, rephrasing lines etc.</p>
+  </li>
+  <li>
+    <p>Removing <code class="highlighter-rouge">flag</code> variable from transolve.<br />
+<code class="highlighter-rouge">flag</code> variable was passed as a function parameter in <code class="highlighter-rouge">transolve</code> and was used to check on the recursive call. The thought was that there might be a case when equation could not be solved by any of the helpers but during the process the equation might get modified, so we wanted to double check whether the modified equation could be solved again, thats why we used <code class="highlighter-rouge">flag</code> but Amit suggested on removing it as there wasn’t a case as of now and it will only make things unnecessarily complicated.</p>
+  </li>
+  <li>
+    <p>Also worked on XFAILS, mainly on solving equations containing only symbols. There was an exception raised in <code class="highlighter-rouge">_invert_real</code>, because of a relational comparison made with <code class="highlighter-rouge">0</code> which caused the faiure of the tests. It has been fixed by handling the exception.</p>
+  </li>
+  <li>
+    <p>Imported tests of log and lambert.</p>
+  </li>
+  <li>
+    <p>Another thing we discussed was about log solver. The helpers for solving logarithmic equations will be implemented in a seperated PR, to make the review and implementing task easy and independent.</p>
+  </li>
+</ul>
 
-<p><a href="https://github.com/Yathartha22/nasa">NASA APOD script</a>. Currently it works on Linux OS, I will try to make it platform independent.</p>
+<p>After this I started a working on solving exponential equations in complex domain, though it turns out that we will be focussing on only the real domain as of now. But I have added tests for it as XFAIL.<br />
+To make exponents work in complex domain, we require the <a href="https://en.wikipedia.org/wiki/Complex_logarithm">complex logarithm</a>.
+If we have equation as</p>
 
-<p>Till then enjoy with amazing and cool space pics from NASA 😃</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>	z = e**w,
+	where w is complex number and z is non-zero complex number,
+	then 
+	Ln(z) = ln|z| + I*(Arg(z) + 2*n*pi)
+	where Ln(z) is the complex logarithm and ln|z| is the
+        logarithm evaluated with real number argument.
+</code></pre>
+</div>
+
+<p>Apart from this we also had a meeting yesterday in which we discussed about how we will be wrapping up things before the first evaluation.<br />
+I will be completing few leftovers of the current PR to make it merge and start working on implementing log solver (making a commit probably by tomorrow).</p>
+
+<p>Amit also suggested on creating a coverage report so as to get an idea about the amount of tests covered by the code. The current coverage report can be found <a href="/covhtml/sympy_solvers_solveset_py.html">here</a>. Other than this he also advised on reading <a href="https://www.investigatii.md/uploads/resurse/Clean_Code.pdf">Clean Code</a> by <code class="highlighter-rouge">Robert C. Martin</code> which will help me improve in writing clean and efficient code.</p>
+
+<p>The main target for the coming week will be merging <code class="highlighter-rouge">PR #14736</code>, implementing <code class="highlighter-rouge">log solver</code> (will try to merge this as well), starting with implementing <code class="highlighter-rouge">lambert solver</code> (try to add atleast a WIP PR) and reading the book.</p>
+
+<p>Hope things go as planned!!</p>
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -177,15 +214,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-4">
-            GSoC 2018 - Week 4 - Continuing with transolve Part-II
-            <small>09 Jun 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-3">
             GSoC 2018 - Week 3 - Continuing with transolve
             <small>02 Jun 2018</small>
@@ -198,6 +226,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-2">
             GSoC 2018 - Week 2 - Getting started with transolve
             <small>27 May 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-1">
+            GSoC 2018 - Week 1 - Starting up
+            <small>20 May 2018</small>
           </a>
         </h3>
       </li>

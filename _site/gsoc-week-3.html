@@ -144,7 +144,7 @@
    <p>I continued my work of week 2 in this week as well. Though I was travelling for 2-3 days, I was able to give most of the hours to the work dedicated for this week. I had to add a detailed descriptive documentation for <code class="highlighter-rouge">transolve</code>, for this I read documentation of the <code class="highlighter-rouge">ode</code> module as Amit and Harsh suggested, apart from this I read several other documentation of sympy modules. Made a commit regarding this in the <a href="https://github.com/sympy/sympy/pull/14736/">PR</a>.</p>
 
 <p>As of now transolve supports solving majority of exponential equations.
-I have also imported exponential tests of solve and added a few of mine. Some of them needs another look, I have added them to <code class="highlighter-rouge">XFAIL</code> as of now. I am working on these tests to pass. Also done minor changes in the function, like removed <code class="highlighter-rouge">force=True</code> option from <code class="highlighter-rouge">expand_log</code>.</p>
+I have also imported exponential tests of solve and added a few of mine. Some of them needs another look, I have added them to <code class="highlighter-rouge">XFAIL</code> as of now. I am working on these tests to pass. Also done minor changes in the function, like removed <code class="highlighter-rouge">force=True</code> option from <code class="highlighter-rouge">expand_log</code> because using this option is not a healthy choice as the function expands logarithm without considering the assumptions (for exponents the variable should be real) which may sometime get a wrong result.</p>
 
 <p><strong>Idea behind <code class="highlighter-rouge">transolve</code></strong></p>
 
@@ -187,6 +187,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
+          <a href="/gsoc-week-4">
+            GSoC 2018 - Week 4 - Continuing with transolve Part-II
+            <small>09 Jun 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/gsoc-week-2">
             GSoC 2018 - Week 2 - Getting started with transolve
             <small>27 May 2018</small>
@@ -199,15 +208,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-1">
             GSoC 2018 - Week 1 - Starting up
             <small>20 May 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/gsoc-selection">
-            Got Selectd in GSoC
-            <small>29 Apr 2018</small>
           </a>
         </h3>
       </li>
