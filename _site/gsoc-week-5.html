@@ -11,7 +11,7 @@
 
   <title>
     
-      All about GSoC &middot; Yathartha Joshi
+      GSoC 2018 - Week 5 - Implementing log solver &middot; Yathartha Joshi
     
 
   </title>
@@ -143,61 +143,23 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">All about GSoC</h1>
-  <span class="post-date">09 Jun 2017</span>
-   <p><img src="https://geekfeminismdotorg.files.wordpress.com/2016/02/gsoc2016logo.jpg" alt="" /></p>
+  <h1 class="post-title">GSoC 2018 - Week 5 - Implementing log solver</h1>
+  <span class="post-date">17 Jun 2018</span>
+   <p>So this is the last week of the first evaluation. I started with implementing log solver as part of <code class="highlighter-rouge">transolve</code>. As per the documentation of the <code class="highlighter-rouge">transolve</code> we will need two helpers for implementing log solver, <code class="highlighter-rouge">check_log</code> that will check whether the equation is logarithmic or not and <code class="highlighter-rouge">log_solver</code> that will solve the equation. Here’s the <a href="https://github.com/sympy/sympy/pull/14792">PR</a></p>
 
-<p><em>What is GSoC, What it takes it to be a part of GSoC and everything about GSoC.</em></p>
+<p><strong>Idea behind <code class="highlighter-rouge">check_log</code></strong></p>
 
-<p>GSoC is a platform which every student dreams of and I am one of those who really want to be a part.</p>
+<p>Heuristic is implemented to determine whether the equation is logarithmic or not. According to it the logarithmic equations can be reduced to simpler form using log identities. For this purpose we use SymPy’s function <a href="http://docs.sympy.org/latest/tutorial/simplification.html#logcombine">logcombine</a>. If the equation is logarithmic it will be reduced and hence the number of log in the original and modified equation may differ. This will ensure that the equation is logarithmic.</p>
 
-<h2 id="what-actually-gsoc-is">What actually GSoC is?</h2>
+<p><strong>Idea behind the log solver</strong></p>
 
-<p><a href="https://summerofcode.withgoogle.com/">Google Summer of Code</a> is a global program focused on bringing more student developers into open source software development. Students work with an open source organization on a 3 month programming project during their break from school.
-The primary aim of this program is to promote <strong>Open Source Software Development</strong>. It was initiated in May 2005 and is still being conducted.</p>
+<p>The idea is simple, the reduced form from the <code class="highlighter-rouge">check_log</code> is used as the new target equation and is sent to <code class="highlighter-rouge">solveset</code> to handle. Solutions are retuned from <code class="highlighter-rouge">solveset</code>, but it may contain values that won’t satisfy the equation (log does not take negative values in real domain). Therfore to remove unwanted values we use <a href="http://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.checksol">checksol</a> function of solve module which substitutes each solution in the equation and returns <code class="highlighter-rouge">True</code> if it satisfies otherwise <code class="highlighter-rouge">False</code>.</p>
 
-<p>Selected students are provided with stipends by <em>Google</em>.</p>
+<p>Apart from implementing helpers, I have added their documentation. Certain things needs to be done before the PR is ready for review: Tests needs to be added for the helpers and <code class="highlighter-rouge">check_log</code> needs to be improved a bit to handle corner cases.</p>
 
-<h2 id="pre-requisites">Pre-requisites</h2>
+<p>In parallel I am also working on improving <code class="highlighter-rouge">transolve's</code> PR to make it merge as soon as possible. After these two gets completely fixed we will be focusing on implementing <code class="highlighter-rouge">lambert equation solver</code>.</p>
 
-<p>The requirements to be a part of GSoC is</p>
-
-<ul>
-  <li>
-    <p>You must be at least 18 years of age</p>
-  </li>
-  <li>
-    <p>You must currently be a full or part-time student (or have been accepted for the fall term) at an accredited university as of the student     acceptance date.</p>
-  </li>
-</ul>
-
-<h2 id="how-to-prepare-for-gsoc">How to prepare for GSoC</h2>
-
-<p>Well, preparing for GSoC takes a lot of patience and dedication. I will try to cover my experience on what all difficulties I faced during my preparation.</p>
-
-<ul>
-  <li>
-    <p>First of all you need to chose an organization for which you will be applying and working for the rest of months(if selected).</p>
-  </li>
-  <li>
-    <p>You should be well aware of what the organization does, who all are the lead developers, mentors and everything about the organization.</p>
-  </li>
-  <li>
-    <p>Also you should have spent quite a time working with the organization. I suggest you to start contributing as early as possible, because more the time you contribute to the organization the more chances it gets for you being selected.</p>
-  </li>
-</ul>
-
-<p><em>I started working with <a href="http://www.sympy.org/en/index.html">Sympy</a> before 3 months of the GSoC time. I got along with Sympy’s development workflow and submitted few patches and even raised few issues. That is what has to be done to understand the organization properly. For reference on how to start contributing in Open Source you can have a read of my another blog <a href="https://yaj22.wordpress.com/2017/02/12/contributing-to-open-source/">Contributing To Open Source</a>, in which I have tried to cover how to contribute in open source as a newbie.</em></p>
-
-<p>After selecting the organization an application has to be sent suggesting your propsal. Start analysing what you will be proposing in the application. You can either propose a completely new project to work on or either you can chose to work on already established projects.</p>
-
-<p>Try to prepare your application as strong as possible. There is around 14-15 days for you to prepare your application and submit it to the organization. Start working and understanding what has been propsed in the appliation. Try to summarize yourself in a brief and an appropriate manner. Include all the things you have done with the organization, even include your past experience, if any. You can even refer to the senior developers, previous year GSoCers who could advice you to improve the application. Submit your application soon, do not wait for the last moment. One can have a look over the previous years proposals for refreneces.</p>
-
-<p>After submitting the propsal be patient for about a month, because results won’t be out before that. Continue contributing and even if you are not selected don’t get yourself disheartened, because <em><strong>there is always a second a chance</strong></em>, you just need to be optimistic.</p>
-
-<p>Hope these information might get you a start if you are willing to be a part of the prestigious GSoC.</p>
-
-<p>All the best and happy coding!! 🙂</p>
+<p>In the coming week I will be focussing on finishing off the work of these two PR.</p>
 
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
@@ -228,15 +190,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-5">
-            GSoC 2018 - Week 5 - Implementing log solver
-            <small>17 Jun 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-4">
             GSoC 2018 - Week 4 - Continuing with transolve Part-II
             <small>09 Jun 2018</small>
@@ -249,6 +202,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-3">
             GSoC 2018 - Week 3 - Continuing with transolve
             <small>02 Jun 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-2">
+            GSoC 2018 - Week 2 - Getting started with transolve
+            <small>27 May 2018</small>
           </a>
         </h3>
       </li>

@@ -4,13 +4,37 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-06-09T11:41:13+05:30</updated>
+ <updated>2018-06-19T01:19:04+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 5 - Implementing log solver</title>
+   <link href="http://localhost:4000/gsoc-week-5"/>
+   <updated>2018-06-17T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-5</id>
+   <content type="html">&lt;p&gt;So this is the last week of the first evaluation. I started with implementing log solver as part of &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;. As per the documentation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; we will need two helpers for implementing log solver, &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; that will check whether the equation is logarithmic or not and &lt;code class=&quot;highlighter-rouge&quot;&gt;log_solver&lt;/code&gt; that will solve the equation. Here’s the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792&quot;&gt;PR&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Heuristic is implemented to determine whether the equation is logarithmic or not. According to it the logarithmic equations can be reduced to simpler form using log identities. For this purpose we use SymPy’s function &lt;a href=&quot;http://docs.sympy.org/latest/tutorial/simplification.html#logcombine&quot;&gt;logcombine&lt;/a&gt;. If the equation is logarithmic it will be reduced and hence the number of log in the original and modified equation may differ. This will ensure that the equation is logarithmic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind the log solver&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is simple, the reduced form from the &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; is used as the new target equation and is sent to &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; to handle. Solutions are retuned from &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;, but it may contain values that won’t satisfy the equation (log does not take negative values in real domain). Therfore to remove unwanted values we use &lt;a href=&quot;http://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.checksol&quot;&gt;checksol&lt;/a&gt; function of solve module which substitutes each solution in the equation and returns &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; if it satisfies otherwise &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Apart from implementing helpers, I have added their documentation. Certain things needs to be done before the PR is ready for review: Tests needs to be added for the helpers and &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; needs to be improved a bit to handle corner cases.&lt;/p&gt;
+
+&lt;p&gt;In parallel I am also working on improving &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve's&lt;/code&gt; PR to make it merge as soon as possible. After these two gets completely fixed we will be focusing on implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert equation solver&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the coming week I will be focussing on finishing off the work of these two PR.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 4 - Continuing with transolve Part-II</title>
