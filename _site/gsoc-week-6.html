@@ -11,7 +11,7 @@
 
   <title>
     
-      All about GSoC &middot; Yathartha Joshi
+      GSoC 2018 - Week 6 - Continuing with transolve Part-III &middot; Yathartha Joshi
     
 
   </title>
@@ -143,61 +143,37 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">All about GSoC</h1>
-  <span class="post-date">09 Jun 2017</span>
-   <p><img src="https://geekfeminismdotorg.files.wordpress.com/2016/02/gsoc2016logo.jpg" alt="" /></p>
-
-<p><em>What is GSoC, What it takes it to be a part of GSoC and everything about GSoC.</em></p>
-
-<p>GSoC is a platform which every student dreams of and I am one of those who really want to be a part.</p>
-
-<h2 id="what-actually-gsoc-is">What actually GSoC is?</h2>
-
-<p><a href="https://summerofcode.withgoogle.com/">Google Summer of Code</a> is a global program focused on bringing more student developers into open source software development. Students work with an open source organization on a 3 month programming project during their break from school.
-The primary aim of this program is to promote <strong>Open Source Software Development</strong>. It was initiated in May 2005 and is still being conducted.</p>
-
-<p>Selected students are provided with stipends by <em>Google</em>.</p>
-
-<h2 id="pre-requisites">Pre-requisites</h2>
-
-<p>The requirements to be a part of GSoC is</p>
+  <h1 class="post-title">GSoC 2018 - Week 6 - Continuing with transolve Part-III</h1>
+  <span class="post-date">23 Jun 2018</span>
+   <p>For the sixth week, I started working on a few things as per the discussions with Amit:</p>
 
 <ul>
-  <li>
-    <p>You must be at least 18 years of age</p>
-  </li>
-  <li>
-    <p>You must currently be a full or part-time student (or have been accepted for the fall term) at an accredited university as of the student     acceptance date.</p>
-  </li>
+  <li>Improving the API of <code class="highlighter-rouge">transolve</code>.</li>
 </ul>
 
-<h2 id="how-to-prepare-for-gsoc">How to prepare for GSoC</h2>
-
-<p>Well, preparing for GSoC takes a lot of patience and dedication. I will try to cover my experience on what all difficulties I faced during my preparation.</p>
+<p>As <code class="highlighter-rouge">transolve</code> grew over the past few weeks the API became a bit messy, which was against the plan. So Amit suggested on to work on it to make it look clean. For this I added two internal functions <code class="highlighter-rouge">add_type()</code> and <code class="highlighter-rouge">pow_type()</code>, to handle expressions having <code class="highlighter-rouge">add</code> or <code class="highlighter-rouge">power</code> terms respectively. This could help us in achieving what we planned of: making the API extensible without it getting affected from the changes done in the function itself. If new solvers are to be added the modifcation has to be done in either of the internal functions.</p>
 
 <ul>
-  <li>
-    <p>First of all you need to chose an organization for which you will be applying and working for the rest of months(if selected).</p>
-  </li>
-  <li>
-    <p>You should be well aware of what the organization does, who all are the lead developers, mentors and everything about the organization.</p>
-  </li>
-  <li>
-    <p>Also you should have spent quite a time working with the organization. I suggest you to start contributing as early as possible, because more the time you contribute to the organization the more chances it gets for you being selected.</p>
-  </li>
+  <li>Improved the working of <code class="highlighter-rouge">_check_expo</code>.</li>
 </ul>
 
-<p><em>I started working with <a href="http://www.sympy.org/en/index.html">Sympy</a> before 3 months of the GSoC time. I got along with Sympy’s development workflow and submitted few patches and even raised few issues. That is what has to be done to understand the organization properly. For reference on how to start contributing in Open Source you can have a read of my another blog <a href="https://yaj22.wordpress.com/2017/02/12/contributing-to-open-source/">Contributing To Open Source</a>, in which I have tried to cover how to contribute in open source as a newbie.</em></p>
+<p>The implementation of the <code class="highlighter-rouge">check_expo</code> had a probelm, of not being generalised, only equations having two terms were checked. So the task was to make it generalised, so I implemented it using <a href="http://docs.sympy.org/latest/modules/core.html#atom">atoms</a>, filtered the equations having <code class="highlighter-rouge">Pow</code> or <code class="highlighter-rouge">exp</code> with the help of <code class="highlighter-rouge">.atoms()</code> and then checked whether the variable that needs to be solved is present in the exponent or not but this too possesed a problem: asking for atoms was not a great choice as they can come from anywhere like <code class="highlighter-rouge">cos(2**x).atoms(Pow, exp)</code> would give <code class="highlighter-rouge">2**x</code> and consequently the helper would return <code class="highlighter-rouge">True</code>, which is wrong. For this <a href="https://github.com/smichr">smichr</a> suggested even better method of using <a href="https://github.com/sympy/sympy/blob/master/sympy/core/operations.py#L344">.make_args()</a>. We will seperate out all the <code class="highlighter-rouge">Add</code> arguments and then in each of them we will look for <code class="highlighter-rouge">Mul</code> arguments which will give us the atomic argument of the expression, now this term can be tested to have variable in the exponent.</p>
 
-<p>After selecting the organization an application has to be sent suggesting your propsal. Start analysing what you will be proposing in the application. You can either propose a completely new project to work on or either you can chose to work on already established projects.</p>
+<ul>
+  <li>Changes in the documentation</li>
+</ul>
 
-<p>Try to prepare your application as strong as possible. There is around 14-15 days for you to prepare your application and submit it to the organization. Start working and understanding what has been propsed in the appliation. Try to summarize yourself in a brief and an appropriate manner. Include all the things you have done with the organization, even include your past experience, if any. You can even refer to the senior developers, previous year GSoCers who could advice you to improve the application. Submit your application soon, do not wait for the last moment. One can have a look over the previous years proposals for refreneces.</p>
+<p>Also there were a few things that needed to fixed in the documentation. The docstring of <code class="highlighter-rouge">expo_solver</code> and <code class="highlighter-rouge">check_expo</code> were improved. Few changes were also done in <code class="highlighter-rouge">transolve's</code> documentation.</p>
 
-<p>After submitting the propsal be patient for about a month, because results won’t be out before that. Continue contributing and even if you are not selected don’t get yourself disheartened, because <em><strong>there is always a second a chance</strong></em>, you just need to be optimistic.</p>
+<ul>
+  <li>Worked on improvement of <code class="highlighter-rouge">log solver</code></li>
+</ul>
 
-<p>Hope these information might get you a start if you are willing to be a part of the prestigious GSoC.</p>
+<p>Apart from this I did some improvement in <code class="highlighter-rouge">check_log</code> to handle corner cases. As per the current logic <code class="highlighter-rouge">check_log</code> would return a “<em>logcombined</em>” equation to be further solved by <code class="highlighter-rouge">log_solver</code>, but this lead to a problem that the some equation (<code class="highlighter-rouge">log(x**y) - y*log(x)</code>) might get reduced to <code class="highlighter-rouge">0</code> and the check would fail, therefore this was handled by improving the condition as <code class="highlighter-rouge">if condition not False</code>. Apart from this single term expression needs to be properly handled.</p>
 
-<p>All the best and happy coding!! 🙂</p>
+<p>Also I started getting familiar with <code class="highlighter-rouge">lambert</code> equations.</p>
+
+<p>So these were the things that I worked on this week. The PR needs a bit more improvement to get merged, I will try to get it finished by mid of the coming week and start working on implementation of other solvers.</p>
 
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
@@ -228,15 +204,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-6">
-            GSoC 2018 - Week 6 - Continuing with transolve Part-III
-            <small>23 Jun 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-5">
             GSoC 2018 - Week 5 - Implementing log solver
             <small>17 Jun 2018</small>
@@ -249,6 +216,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-4">
             GSoC 2018 - Week 4 - Continuing with transolve Part-II
             <small>09 Jun 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-3">
+            GSoC 2018 - Week 3 - Continuing with transolve
+            <small>02 Jun 2018</small>
           </a>
         </h3>
       </li>

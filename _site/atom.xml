@@ -4,13 +4,51 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-06-19T01:19:04+05:30</updated>
+ <updated>2018-06-24T08:20:51+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 6 - Continuing with transolve Part-III</title>
+   <link href="http://localhost:4000/gsoc-week-6"/>
+   <updated>2018-06-23T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-6</id>
+   <content type="html">&lt;p&gt;For the sixth week, I started working on a few things as per the discussions with Amit:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Improving the API of &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; grew over the past few weeks the API became a bit messy, which was against the plan. So Amit suggested on to work on it to make it look clean. For this I added two internal functions &lt;code class=&quot;highlighter-rouge&quot;&gt;add_type()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;pow_type()&lt;/code&gt;, to handle expressions having &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;power&lt;/code&gt; terms respectively. This could help us in achieving what we planned of: making the API extensible without it getting affected from the changes done in the function itself. If new solvers are to be added the modifcation has to be done in either of the internal functions.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Improved the working of &lt;code class=&quot;highlighter-rouge&quot;&gt;_check_expo&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The implementation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;check_expo&lt;/code&gt; had a probelm, of not being generalised, only equations having two terms were checked. So the task was to make it generalised, so I implemented it using &lt;a href=&quot;http://docs.sympy.org/latest/modules/core.html#atom&quot;&gt;atoms&lt;/a&gt;, filtered the equations having &lt;code class=&quot;highlighter-rouge&quot;&gt;Pow&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;exp&lt;/code&gt; with the help of &lt;code class=&quot;highlighter-rouge&quot;&gt;.atoms()&lt;/code&gt; and then checked whether the variable that needs to be solved is present in the exponent or not but this too possesed a problem: asking for atoms was not a great choice as they can come from anywhere like &lt;code class=&quot;highlighter-rouge&quot;&gt;cos(2**x).atoms(Pow, exp)&lt;/code&gt; would give &lt;code class=&quot;highlighter-rouge&quot;&gt;2**x&lt;/code&gt; and consequently the helper would return &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;, which is wrong. For this &lt;a href=&quot;https://github.com/smichr&quot;&gt;smichr&lt;/a&gt; suggested even better method of using &lt;a href=&quot;https://github.com/sympy/sympy/blob/master/sympy/core/operations.py#L344&quot;&gt;.make_args()&lt;/a&gt;. We will seperate out all the &lt;code class=&quot;highlighter-rouge&quot;&gt;Add&lt;/code&gt; arguments and then in each of them we will look for &lt;code class=&quot;highlighter-rouge&quot;&gt;Mul&lt;/code&gt; arguments which will give us the atomic argument of the expression, now this term can be tested to have variable in the exponent.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Changes in the documentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also there were a few things that needed to fixed in the documentation. The docstring of &lt;code class=&quot;highlighter-rouge&quot;&gt;expo_solver&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;check_expo&lt;/code&gt; were improved. Few changes were also done in &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve's&lt;/code&gt; documentation.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Worked on improvement of &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from this I did some improvement in &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; to handle corner cases. As per the current logic &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; would return a “&lt;em&gt;logcombined&lt;/em&gt;” equation to be further solved by &lt;code class=&quot;highlighter-rouge&quot;&gt;log_solver&lt;/code&gt;, but this lead to a problem that the some equation (&lt;code class=&quot;highlighter-rouge&quot;&gt;log(x**y) - y*log(x)&lt;/code&gt;) might get reduced to &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; and the check would fail, therefore this was handled by improving the condition as &lt;code class=&quot;highlighter-rouge&quot;&gt;if condition not False&lt;/code&gt;. Apart from this single term expression needs to be properly handled.&lt;/p&gt;
+
+&lt;p&gt;Also I started getting familiar with &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert&lt;/code&gt; equations.&lt;/p&gt;
+
+&lt;p&gt;So these were the things that I worked on this week. The PR needs a bit more improvement to get merged, I will try to get it finished by mid of the coming week and start working on implementation of other solvers.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 5 - Implementing log solver</title>
