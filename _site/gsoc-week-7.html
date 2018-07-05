@@ -11,7 +11,7 @@
 
   <title>
     
-      Web Crawlers and Web Crawling &middot; Yathartha Joshi
+      GSoC 2018 - Week 7 - Continuing with transolve Part-IV &middot; Yathartha Joshi
     
 
   </title>
@@ -143,76 +143,32 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Web Crawlers and Web Crawling</h1>
-  <span class="post-date">07 Jul 2017</span>
-   <p><img src="/public/web-crawlers.jpg" style="width:30%;height:30%" /></p>
-
-<p>Ever wondered how a search engine comes up with the exact results when you type something in its query box? After all, there are trillions of results matching your search query. A fascinating process is at work behind it. It is the <strong>Web Crawler</strong> that is responsible for accomplishing the task. So what is a <code class="highlighter-rouge">web crawler</code>, what it does and how it does, I will try to answer all these.</p>
-
-<p><strong>What is a Web Crawler</strong></p>
-
-<blockquote>
-  <p><em>Web Crawler</em> or simply a <em>Crawler</em> is a program that acts as an automated script which browses through the internet in a systematic way.</p>
-</blockquote>
-
-<p>Web Crawlers are also known as <code class="highlighter-rouge">Spiders</code>, <code class="highlighter-rouge">Robot</code>, <code class="highlighter-rouge">SearchBot</code> or simply <code class="highlighter-rouge">Bot</code>. Web crawlers are one of the most common used systems now-a-days. The most popular example is that <em>Google</em> is using crawlers to collect information from all websites.</p>
-
-<p>A <code class="highlighter-rouge">Search Engine Spider</code> is a program that most search engines use to find what’s new on the Internet. The crawler looks at the keywords in the pages, the kind of content each page has and the links, before returning the information to the search engine. This process is known as <code class="highlighter-rouge">Web crawling</code>.</p>
-
-<p>Besides search engine, news websites need crawlers to aggregate data sources. It seems that whenever you want to aggregate a large amount of information, you may consider using crawlers.</p>
-
-<p><strong>Why is Web Crawling Important</strong></p>
-
-<p>Let me make you understand with an example to show why web crawling is important.</p>
-
-<p>Data lies in the heart of any business, even more if its tech related. With all the open standards of today like RSS feeds or APIs sharing data across systems have become relatively easier.</p>
-
-<p>For example, if you want to read today’s financial news directly from your email inbox, you could simply subscribe to the provider’s (like Google News or BBC) RSS feed. Similarly, your system or application could also use a provider’s API to get upto date information.
-But what about data that is unstructured or does not have RSS feeds for you to consume? How will you go about fetching them?</p>
-
-<p>Let’s consider another simple example. Suppose you have a shopping site and have 1000 products. You want to make sure your prices are competitive. In order to do that, you will need to monitor your competitors’ sites and their prices for the same products. If there are a lot of products and lot of competitors it is going to be very difficult to do this without some automated process.</p>
-
-<p>This is where <code class="highlighter-rouge">Web Crawling</code> comes into picture.</p>
-
-<p><code class="highlighter-rouge">Web Crawling</code> technology was made popular by Google for its use in their search. They were the first to see the importance of immense amount of data on the web which was then not crawled and indexed. They capitalized on that – sent out thousands of crawlers to the web and indexed everything they could possibly find!</p>
-
-<p>To sum up let’s get few points summarized as to why web crawling is important:</p>
+  <h1 class="post-title">GSoC 2018 - Week 7 - Continuing with transolve Part-IV</h1>
+  <span class="post-date">01 Jul 2018</span>
+   <p>This week I continued to work on finalising the design of the <code class="highlighter-rouge">_transolve</code>. Following were the things discussed and implemented:</p>
 
 <ul>
   <li>
-    <p>Gather data for business intelligence.</p>
+    <p>The loop over the <code class="highlighter-rouge">rhs_s</code> was removed because <code class="highlighter-rouge">solveset</code> already has a loop and since <code class="highlighter-rouge">_transolve</code> is called within the loop therefore there won’t be a case where there would be more than one argument in <code class="highlighter-rouge">rhs_s</code> inside <code class="highlighter-rouge">_transolve</code>.</p>
   </li>
   <li>
-    <p>Market research about the product or service you are offering.</p>
+    <p><code class="highlighter-rouge">pow_type()</code> was created to handle power type equations in <code class="highlighter-rouge">_transolve</code> but it turns out that power type equations will be handled in the <code class="highlighter-rouge">_invert()</code> itself, so it was repetitive to add again.</p>
   </li>
   <li>
-    <p>Monitor competitor’s product or solution 24/7.</p>
+    <p>The names of the solving helpers were improved to <code class="highlighter-rouge">_solve_class</code> from the previous <code class="highlighter-rouge">_class_solver</code>.</p>
   </li>
   <li>
-    <p>Gather user behavior data to make your product perform better.</p>
+    <p>Discussions with Amit and Chris led to the conclusion that <code class="highlighter-rouge">_transolve</code> should be completely made an internal function of <code class="highlighter-rouge">solveset</code>, i.e. it should not be used as an independent function. At first the thought was that it can be used as an independent function, but this created a problem of the code being repeated as that of <code class="highlighter-rouge">solveset</code>, so Chris suggested that <code class="highlighter-rouge">_transolve</code> should raise an error for equations that <code class="highlighter-rouge">solveset</code> can handle, but again this created problem, it would make unnnecessary complications in the code as we need to be very specific as to when and where raise an error.</p>
+  </li>
+  <li>
+    <p>We decided to have same arguments for all the helpers. Be it identification or solving helper, both will take the equation and the variable as their arguments, with the choice that the helper can ignore to use any of the argument if not needed.</p>
+  </li>
+  <li>
+    <p>There were a lot of improvement in the documentation as the design changed.</p>
   </li>
 </ul>
 
-<p><strong>How does a Web Crawler work</strong></p>
-
-<p>In short as explained by <a href="https://support.google.com/webmasters/answer/70897?hl=en">Google</a> on how Google Search works, for web crawling procedure there are mainly three steps:</p>
-
-<ul>
-  <li>First, the search bot starts by crawling the pages of your site(<strong>Crawling</strong>).</li>
-  <li>Then it continues indexing the words and content of the site(<strong>Indexing</strong>), and</li>
-  <li>finally it visit the links (web page addresses or URLs) that are found in your site.</li>
-</ul>
-
-<p>To control the way a spider looks to your website is by using a <strong>robots.txt</strong> file. The first thing a spider is supposed to do when it visits your website is look for a file called <em>robots.txt</em>. This file contains instructions for the spider on which parts of the website to index, and which parts to ignore.</p>
-
-<p>Another piece of information I would share is the following answer in <strong>Quora</strong>, when asked</p>
-
-<p><strong><em>What are some ideas of how a startup can use web crawler scripts to drive growth?</em></strong></p>
-
-<p><img src="/public/quora-web-crawler-answer.png" style="height=30%" /></p>
-
-<p>This was just an idea about <code class="highlighter-rouge">web crawlers</code> and <code class="highlighter-rouge">web crawling</code>. Hope, this might help you to get started with crawlers. Till then All the Best 👍 and Happy Coding 😃</p>
-
+<p>Apart from these changes work in implementing <code class="highlighter-rouge">log solver</code> is going on in parallel.</p>
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -242,15 +198,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-7">
-            GSoC 2018 - Week 7 - Continuing with transolve Part-IV
-            <small>01 Jul 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-6">
             GSoC 2018 - Week 6 - Continuing with transolve Part-III
             <small>23 Jun 2018</small>
@@ -263,6 +210,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-5">
             GSoC 2018 - Week 5 - Implementing log solver
             <small>17 Jun 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-4">
+            GSoC 2018 - Week 4 - Continuing with transolve Part-II
+            <small>09 Jun 2018</small>
           </a>
         </h3>
       </li>

@@ -4,13 +4,45 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-06-24T08:20:51+05:30</updated>
+ <updated>2018-07-05T08:13:41+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 7 - Continuing with transolve Part-IV</title>
+   <link href="http://localhost:4000/gsoc-week-7"/>
+   <updated>2018-07-01T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-7</id>
+   <content type="html">&lt;p&gt;This week I continued to work on finalising the design of the &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt;. Following were the things discussed and implemented:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The loop over the &lt;code class=&quot;highlighter-rouge&quot;&gt;rhs_s&lt;/code&gt; was removed because &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; already has a loop and since &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; is called within the loop therefore there won’t be a case where there would be more than one argument in &lt;code class=&quot;highlighter-rouge&quot;&gt;rhs_s&lt;/code&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pow_type()&lt;/code&gt; was created to handle power type equations in &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; but it turns out that power type equations will be handled in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_invert()&lt;/code&gt; itself, so it was repetitive to add again.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The names of the solving helpers were improved to &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_class&lt;/code&gt; from the previous &lt;code class=&quot;highlighter-rouge&quot;&gt;_class_solver&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Discussions with Amit and Chris led to the conclusion that &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; should be completely made an internal function of &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;, i.e. it should not be used as an independent function. At first the thought was that it can be used as an independent function, but this created a problem of the code being repeated as that of &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;, so Chris suggested that &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; should raise an error for equations that &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; can handle, but again this created problem, it would make unnnecessary complications in the code as we need to be very specific as to when and where raise an error.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We decided to have same arguments for all the helpers. Be it identification or solving helper, both will take the equation and the variable as their arguments, with the choice that the helper can ignore to use any of the argument if not needed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;There were a lot of improvement in the documentation as the design changed.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from these changes work in implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt; is going on in parallel.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 6 - Continuing with transolve Part-III</title>
