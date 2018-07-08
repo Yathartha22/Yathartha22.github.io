@@ -11,7 +11,7 @@
 
   <title>
     
-      GSoC 2018 - Week 7 - Continuing with transolve Part-IV &middot; Yathartha Joshi
+      GSoC 2018 - Week 8 - Improving solving of logarithmic equations &middot; Yathartha Joshi
     
 
   </title>
@@ -143,32 +143,73 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">GSoC 2018 - Week 7 - Continuing with transolve Part-IV</h1>
-  <span class="post-date">01 Jul 2018</span>
-   <p>This week I continued to work on finalising the design of the <code class="highlighter-rouge">_transolve</code>. Following were the things discussed and implemented:</p>
+  <h1 class="post-title">GSoC 2018 - Week 8 - Improving solving of logarithmic equations</h1>
+  <span class="post-date">08 Jul 2018</span>
+   <p>Before the start of the week Amit and I discussed on a few points on:</p>
+
+<p><strong>Note</strong>: <code class="highlighter-rouge">is_logarithmic()</code> is an identifier helper for <code class="highlighter-rouge">_transolve</code> to determine whether the expression is logarithmic or not.
+      and <code class="highlighter-rouge">_solve_log()</code> is a solving helper that returns the equation in a tractable form for <code class="highlighter-rouge">solveset</code> to better handle.</p>
+
+<ul>
+  <li>What should <code class="highlighter-rouge">is_logarithmic()</code> return?</li>
+</ul>
+
+<p>While designing the method at first it returned a <code class="highlighter-rouge">logcombined</code> equation if found to be logarithmic, but we agreed upon having consistency among all the identifying helpers to return either <code class="highlighter-rouge">True</code> or <code class="highlighter-rouge">False</code>.</p>
+
+<ul>
+  <li>How <code class="highlighter-rouge">_is_logarithmic()</code> should work?</li>
+</ul>
+
+<p>Next question was how it should work. We can implement it in two ways either to make the <code class="highlighter-rouge">logcombined</code> equation, if the expression reduces, it is obviously a logarithmic equation otherwise not. We also need to check whether the equation reduced has the variable to be solved in its <code class="highlighter-rouge">free_symbols</code>
+But <code class="highlighter-rouge">logcombine</code> possessed a problem that it unknowingly manipulates the equation, like <code class="highlighter-rouge">log(x) - log(2*x)</code> would reduce to <code class="highlighter-rouge">log(1/2)</code> for which the routine would return <code class="highlighter-rouge">False</code> as there are no symbol involved. So a more better way needs to be implemented.</p>
+
+<ul>
+  <li>How <code class="highlighter-rouge">_solve_log()</code> will handle removing unwanted solutions?</li>
+</ul>
+
+<p>Simply reducing the logarithmic equation to a tractable form for <code class="highlighter-rouge">solveset</code> to handle would cause spurious solutions in the result. Therefore it becomes necessary to remove them. Take for example: <code class="highlighter-rouge">solveset</code> gives the result of <code class="highlighter-rouge">log(x - 3) + log(x + 3)</code> as <code class="highlighter-rouge"><span class="p">{</span><span class="err">-sqrt(10),</span><span class="w"> </span><span class="err">sqrt(10)</span><span class="p">}</span></code>, but <code class="highlighter-rouge">-sqrt(10)</code> is not the solution in <code class="highlighter-rouge">Real</code> domain. Therefore one way to remove it was using <code class="highlighter-rouge">checksol</code>. Amit suggested on to have a look over the singularities and try incorporating the check in <code class="highlighter-rouge">_solveset</code>.</p>
+
+<p>Things that I did during the week:</p>
+
+<ul>
+  <li>improved <code class="highlighter-rouge">is_logarithmic()</code></li>
+</ul>
+
+<p>Removed the <code class="highlighter-rouge">logcombine</code> way of checking the equation. As of now the <code class="highlighter-rouge">_is_logarithm</code> checks for every term to be logarithmic in terms of the variable to be solved, if so it returns <code class="highlighter-rouge">True</code> otherwise <code class="highlighter-rouge">False</code></p>
+
+<ul>
+  <li>improved the <code class="highlighter-rouge">_solve_log()</code></li>
+</ul>
+
+<p>As per the current documentation of <code class="highlighter-rouge">_transolve</code> this routine is improved to return a modified form of the equation that <code class="highlighter-rouge">solveset</code> could better handle. Checking of the spurious solutions will take place in <code class="highlighter-rouge">solveset</code> itself.</p>
+
+<ul>
+  <li>Way to remove spurious solutions</li>
+</ul>
+
+<p>To handle this scenario I have added a <a href="https://github.com/sympy/sympy/pull/14792/files#diff-eec0422923e8f100745c015cd8fdd6cfR985">check</a> in <code class="highlighter-rouge">_solveset</code> specifically for logarithmic equations to remove spurious solutions.
+The idea is based on the fact that natural log in undefined for negative and zero value, therefore this method gets each term of the expression, substitutes each solution to every term one by one and if for any term the value isn’t real that solution will not be included.</p>
+
+<p>Why <code class="highlighter-rouge">checksol()</code> is not the appropriate way?</p>
+
+<p>At first I thought of using the <code class="highlighter-rouge">checksol()</code>, but it possessed a problem. <code class="highlighter-rouge">checksol</code> unintensionally allows wrong solution to creep in. Take for example <code class="highlighter-rouge">log(3*x) - log(-x + 1) - log(4*x + 1)</code>, <code class="highlighter-rouge">solveset</code> would give <code class="highlighter-rouge">-1/2 and 1/2</code> as the solutions but the former isn’t a solution in real domain. Using <code class="highlighter-rouge">checksol</code> would not remove this as <code class="highlighter-rouge">I*pi</code> gets cancelled out during evaluating the expression therefore it returns <code class="highlighter-rouge">True</code>, which is not correct.</p>
+
+<ul>
+  <li>Addressing comments</li>
+</ul>
+
+<p>Apart from this few changes have been done in the <code class="highlighter-rouge">_transolve</code> <a href="https://github.com/sympy/sympy/pull/14736">PR</a>:</p>
 
 <ul>
   <li>
-    <p>The loop over the <code class="highlighter-rouge">rhs_s</code> was removed because <code class="highlighter-rouge">solveset</code> already has a loop and since <code class="highlighter-rouge">_transolve</code> is called within the loop therefore there won’t be a case where there would be more than one argument in <code class="highlighter-rouge">rhs_s</code> inside <code class="highlighter-rouge">_transolve</code>.</p>
+    <p>I have added a method that would return all the terms present in the expression: <a href="https://github.com/sympy/sympy/pull/14736/files#diff-eec0422923e8f100745c015cd8fdd6cfR988">make_expr_args()</a></p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">pow_type()</code> was created to handle power type equations in <code class="highlighter-rouge">_transolve</code> but it turns out that power type equations will be handled in the <code class="highlighter-rouge">_invert()</code> itself, so it was repetitive to add again.</p>
-  </li>
-  <li>
-    <p>The names of the solving helpers were improved to <code class="highlighter-rouge">_solve_class</code> from the previous <code class="highlighter-rouge">_class_solver</code>.</p>
-  </li>
-  <li>
-    <p>Discussions with Amit and Chris led to the conclusion that <code class="highlighter-rouge">_transolve</code> should be completely made an internal function of <code class="highlighter-rouge">solveset</code>, i.e. it should not be used as an independent function. At first the thought was that it can be used as an independent function, but this created a problem of the code being repeated as that of <code class="highlighter-rouge">solveset</code>, so Chris suggested that <code class="highlighter-rouge">_transolve</code> should raise an error for equations that <code class="highlighter-rouge">solveset</code> can handle, but again this created problem, it would make unnnecessary complications in the code as we need to be very specific as to when and where raise an error.</p>
-  </li>
-  <li>
-    <p>We decided to have same arguments for all the helpers. Be it identification or solving helper, both will take the equation and the variable as their arguments, with the choice that the helper can ignore to use any of the argument if not needed.</p>
-  </li>
-  <li>
-    <p>There were a lot of improvement in the documentation as the design changed.</p>
+    <p>Made the expresssion remain unevaluated when doing <a href="https://github.com/sympy/sympy/pull/14736/files#diff-eec0422923e8f100745c015cd8fdd6cfR1299">lhs - rhs</a> within <code class="highlighter-rouge">_transolve</code>.</p>
   </li>
 </ul>
 
-<p>Apart from these changes work in implementing <code class="highlighter-rouge">log solver</code> is going on in parallel.</p>
+<p>Read this <a href="http://localhost:4000/gsoc-week-5">blog</a> for better understanding of logarithmic solving.</p>
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -198,9 +239,9 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-8">
-            GSoC 2018 - Week 8 - Improving solving of logarithmic equations
-            <small>08 Jul 2018</small>
+          <a href="/gsoc-week-7">
+            GSoC 2018 - Week 7 - Continuing with transolve Part-IV
+            <small>01 Jul 2018</small>
           </a>
         </h3>
       </li>

@@ -4,13 +4,86 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-05T08:13:41+05:30</updated>
+ <updated>2018-07-08T11:14:17+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 8 - Improving solving of logarithmic equations</title>
+   <link href="http://localhost:4000/gsoc-week-8"/>
+   <updated>2018-07-08T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-8</id>
+   <content type="html">&lt;p&gt;Before the start of the week Amit and I discussed on a few points on:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;is_logarithmic()&lt;/code&gt; is an identifier helper for &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; to determine whether the expression is logarithmic or not.
+      and &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_log()&lt;/code&gt; is a solving helper that returns the equation in a tractable form for &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; to better handle.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What should &lt;code class=&quot;highlighter-rouge&quot;&gt;is_logarithmic()&lt;/code&gt; return?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While designing the method at first it returned a &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombined&lt;/code&gt; equation if found to be logarithmic, but we agreed upon having consistency among all the identifying helpers to return either &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;_is_logarithmic()&lt;/code&gt; should work?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Next question was how it should work. We can implement it in two ways either to make the &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombined&lt;/code&gt; equation, if the expression reduces, it is obviously a logarithmic equation otherwise not. We also need to check whether the equation reduced has the variable to be solved in its &lt;code class=&quot;highlighter-rouge&quot;&gt;free_symbols&lt;/code&gt;
+But &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombine&lt;/code&gt; possessed a problem that it unknowingly manipulates the equation, like &lt;code class=&quot;highlighter-rouge&quot;&gt;log(x) - log(2*x)&lt;/code&gt; would reduce to &lt;code class=&quot;highlighter-rouge&quot;&gt;log(1/2)&lt;/code&gt; for which the routine would return &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt; as there are no symbol involved. So a more better way needs to be implemented.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_log()&lt;/code&gt; will handle removing unwanted solutions?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simply reducing the logarithmic equation to a tractable form for &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; to handle would cause spurious solutions in the result. Therefore it becomes necessary to remove them. Take for example: &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; gives the result of &lt;code class=&quot;highlighter-rouge&quot;&gt;log(x - 3) + log(x + 3)&lt;/code&gt; as &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-sqrt(10),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;sqrt(10)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;, but &lt;code class=&quot;highlighter-rouge&quot;&gt;-sqrt(10)&lt;/code&gt; is not the solution in &lt;code class=&quot;highlighter-rouge&quot;&gt;Real&lt;/code&gt; domain. Therefore one way to remove it was using &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol&lt;/code&gt;. Amit suggested on to have a look over the singularities and try incorporating the check in &lt;code class=&quot;highlighter-rouge&quot;&gt;_solveset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Things that I did during the week:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;improved &lt;code class=&quot;highlighter-rouge&quot;&gt;is_logarithmic()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Removed the &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombine&lt;/code&gt; way of checking the equation. As of now the &lt;code class=&quot;highlighter-rouge&quot;&gt;_is_logarithm&lt;/code&gt; checks for every term to be logarithmic in terms of the variable to be solved, if so it returns &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; otherwise &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;improved the &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_log()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As per the current documentation of &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; this routine is improved to return a modified form of the equation that &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; could better handle. Checking of the spurious solutions will take place in &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; itself.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Way to remove spurious solutions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To handle this scenario I have added a &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792/files#diff-eec0422923e8f100745c015cd8fdd6cfR985&quot;&gt;check&lt;/a&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;_solveset&lt;/code&gt; specifically for logarithmic equations to remove spurious solutions.
+The idea is based on the fact that natural log in undefined for negative and zero value, therefore this method gets each term of the expression, substitutes each solution to every term one by one and if for any term the value isn’t real that solution will not be included.&lt;/p&gt;
+
+&lt;p&gt;Why &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol()&lt;/code&gt; is not the appropriate way?&lt;/p&gt;
+
+&lt;p&gt;At first I thought of using the &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol()&lt;/code&gt;, but it possessed a problem. &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol&lt;/code&gt; unintensionally allows wrong solution to creep in. Take for example &lt;code class=&quot;highlighter-rouge&quot;&gt;log(3*x) - log(-x + 1) - log(4*x + 1)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; would give &lt;code class=&quot;highlighter-rouge&quot;&gt;-1/2 and 1/2&lt;/code&gt; as the solutions but the former isn’t a solution in real domain. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol&lt;/code&gt; would not remove this as &lt;code class=&quot;highlighter-rouge&quot;&gt;I*pi&lt;/code&gt; gets cancelled out during evaluating the expression therefore it returns &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;, which is not correct.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Addressing comments&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from this few changes have been done in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;PR&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;I have added a method that would return all the terms present in the expression: &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/files#diff-eec0422923e8f100745c015cd8fdd6cfR988&quot;&gt;make_expr_args()&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Made the expresssion remain unevaluated when doing &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/files#diff-eec0422923e8f100745c015cd8fdd6cfR1299&quot;&gt;lhs - rhs&lt;/a&gt; within &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Read this &lt;a href=&quot;http://localhost:4000/gsoc-week-5&quot;&gt;blog&lt;/a&gt; for better understanding of logarithmic solving.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 7 - Continuing with transolve Part-IV</title>
