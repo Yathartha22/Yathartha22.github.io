@@ -11,7 +11,7 @@
 
   <title>
     
-      GSoC 2018 - Week 4 - Continuing with transolve Part-II &middot; Yathartha Joshi
+      GSoC 2018 - Week 9 - Starting up with Lambert equations &middot; Yathartha Joshi
     
 
   </title>
@@ -143,52 +143,46 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">GSoC 2018 - Week 4 - Continuing with transolve Part-II</h1>
-  <span class="post-date">09 Jun 2018</span>
-   <p>By the end of the previous week I had completed majority of the TODO’s of the <a href="https://github.com/sympy/sympy/pull/14736/">PR #14736</a>.
-This week I started on minor improvements suggested by Amit. This included:</p>
+  <h1 class="post-title">GSoC 2018 - Week 9 - Starting up with Lambert equations</h1>
+  <span class="post-date">13 Jul 2018</span>
+   <p>At the start of the week I worked on the leftovers of week 8:</p>
+
+<ul>
+  <li>added <code class="highlighter-rouge">log_singularities()</code> that will help in determining logarithmic singularities,</li>
+  <li>improved documentation of all helpers as suggested by Amit to maintain consistency</li>
+</ul>
+
+<p>Status of the PR’s:</p>
+
+<p>PR <a href="https://github.com/sympy/sympy/pull/14736">#14736</a> is ready to be merged.</p>
+
+<p>PR <a href="https://github.com/sympy/sympy/pull/14792">#14792</a> is being worked on. Major tasks has been completed, just review and refining has to be done.</p>
+
+<p>Apart from this I started working on the way Lambert type equations can be solved through <code class="highlighter-rouge">_transolve()</code>. I looked into <code class="highlighter-rouge">_tsolve's</code> way of handling such equations.
+For solving Lambert type equations <code class="highlighter-rouge">_tsolve()</code> largely depends on <code class="highlighter-rouge">bivariate.py</code>. It takes help of the different utility functions implemented there.
+Of them two important are <code class="highlighter-rouge">_solve_lambert()</code> and <code class="highlighter-rouge">bivariate_type()</code>. These two helpers help in getting the equations evaluated.</p>
+
+<p>Equations that can be written in the standard form as: <code class="highlighter-rouge">A + B*x + C*log(D + E*x) = 0</code> has the solutions in terms of <code class="highlighter-rouge">Lambert</code> function as:</p>
+
+<p><code class="highlighter-rouge">D/E + C*B*W(t) with (B/C*E)*exp((BD - AE)/CE)</code></p>
+
+<p>This is what <code class="highlighter-rouge">_solve_lambert()</code> determines and accordingly returns the solutions, otherwise returns a <code class="highlighter-rouge">NotImplementedError</code></p>
+
+<p>If <code class="highlighter-rouge">_solve_lambert()</code> is unable to handle <code class="highlighter-rouge">bivariate_type()</code> is tried. This function first tries to identify the type of composite bivariate and then substitutes <code class="highlighter-rouge">Dummy</code> in place of them. For eq: <code class="highlighter-rouge">(x + y)**2 - 3</code> would become <code class="highlighter-rouge">_u**2 - 3</code> where <code class="highlighter-rouge">_u</code> is the dummy variable. The idea is that solving the latter equation for <code class="highlighter-rouge">u</code> and then equating the solutions to the former equation is equivalent for solving the original one.</p>
+
+<p>While implementing in <code class="highlighter-rouge">_transolve</code> this philosophy needs to be applied. As of now I have looked into different tests on how they behave. I will start implementing it next.</p>
+
+<p>Next week’s plan:</p>
 
 <ul>
   <li>
-    <p>Minor Documentation changes<br />
-Included proof of correctness, typo fixes, rephrasing lines etc.</p>
+    <p>Finishing with the logsolver</p>
   </li>
   <li>
-    <p>Removing <code class="highlighter-rouge">flag</code> variable from transolve.<br />
-<code class="highlighter-rouge">flag</code> variable was passed as a function parameter in <code class="highlighter-rouge">transolve</code> and was used to check on the recursive call. The thought was that there might be a case when equation could not be solved by any of the helpers but during the process the equation might get modified, so we wanted to double check whether the modified equation could be solved again, thats why we used <code class="highlighter-rouge">flag</code> but Amit suggested on removing it as there wasn’t a case as of now and it will only make things unnecessarily complicated.</p>
-  </li>
-  <li>
-    <p>Also worked on XFAILS, mainly on solving equations containing only symbols. There was an exception raised in <code class="highlighter-rouge">_invert_real</code>, because of a relational comparison made with <code class="highlighter-rouge">0</code> which caused the faiure of the tests. It has been fixed by handling the exception.</p>
-  </li>
-  <li>
-    <p>Imported tests of log and lambert.</p>
-  </li>
-  <li>
-    <p>Another thing we discussed was about log solver. The helpers for solving logarithmic equations will be implemented in a seperated PR, to make the review and implementing task easy and independent.</p>
+    <p>Implementing lambert solver.</p>
   </li>
 </ul>
 
-<p>After this I started a working on solving exponential equations in complex domain, though it turns out that we will be focussing on only the real domain as of now. But I have added tests for it as XFAIL.<br />
-To make exponents work in complex domain, we require the <a href="https://en.wikipedia.org/wiki/Complex_logarithm">complex logarithm</a>.
-If we have equation as</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>	z = e**w,
-	where w is complex number and z is non-zero complex number,
-	then 
-	Ln(z) = ln|z| + I*(Arg(z) + 2*n*pi)
-	where Ln(z) is the complex logarithm and ln|z| is the
-        logarithm evaluated with real number argument.
-</code></pre>
-</div>
-
-<p>Apart from this we also had a meeting yesterday in which we discussed about how we will be wrapping up things before the first evaluation.<br />
-I will be completing few leftovers of the current PR to make it merge and start working on implementing log solver (making a commit probably by tomorrow).</p>
-
-<p>Amit also suggested on creating a coverage report so as to get an idea about the amount of tests covered by the code. The current coverage report can be found <a href="/covhtml/sympy_solvers_solveset_py.html">here</a>. Other than this he also advised on reading <a href="https://www.investigatii.md/uploads/resurse/Clean_Code.pdf">Clean Code</a> by <code class="highlighter-rouge">Robert C. Martin</code> which will help me improve in writing clean and efficient code.</p>
-
-<p>The main target for the coming week will be merging <code class="highlighter-rouge">PR #14736</code>, implementing <code class="highlighter-rouge">log solver</code> (will try to merge this as well), starting with implementing <code class="highlighter-rouge">lambert solver</code> (try to add atleast a WIP PR) and reading the book.</p>
-
-<p>Hope things go as planned!!</p>
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -218,15 +212,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-9">
-            GSoC 2018 - Week 9 - Starting up with Lambert equations
-            <small>13 Jul 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-8">
             GSoC 2018 - Week 8 - Improving solving of logarithmic equations
             <small>08 Jul 2018</small>
@@ -239,6 +224,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-7">
             GSoC 2018 - Week 7 - Continuing with transolve Part-IV
             <small>01 Jul 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-6">
+            GSoC 2018 - Week 6 - Continuing with transolve Part-III
+            <small>23 Jun 2018</small>
           </a>
         </h3>
       </li>

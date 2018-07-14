@@ -4,13 +4,59 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-08T11:14:17+05:30</updated>
+ <updated>2018-07-14T07:24:35+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 9 - Starting up with Lambert equations</title>
+   <link href="http://localhost:4000/gsoc-week-9"/>
+   <updated>2018-07-13T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-9</id>
+   <content type="html">&lt;p&gt;At the start of the week I worked on the leftovers of week 8:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;added &lt;code class=&quot;highlighter-rouge&quot;&gt;log_singularities()&lt;/code&gt; that will help in determining logarithmic singularities,&lt;/li&gt;
+  &lt;li&gt;improved documentation of all helpers as suggested by Amit to maintain consistency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Status of the PR’s:&lt;/p&gt;
+
+&lt;p&gt;PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;#14736&lt;/a&gt; is ready to be merged.&lt;/p&gt;
+
+&lt;p&gt;PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792&quot;&gt;#14792&lt;/a&gt; is being worked on. Major tasks has been completed, just review and refining has to be done.&lt;/p&gt;
+
+&lt;p&gt;Apart from this I started working on the way Lambert type equations can be solved through &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve()&lt;/code&gt;. I looked into &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve's&lt;/code&gt; way of handling such equations.
+For solving Lambert type equations &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve()&lt;/code&gt; largely depends on &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate.py&lt;/code&gt;. It takes help of the different utility functions implemented there.
+Of them two important are &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type()&lt;/code&gt;. These two helpers help in getting the equations evaluated.&lt;/p&gt;
+
+&lt;p&gt;Equations that can be written in the standard form as: &lt;code class=&quot;highlighter-rouge&quot;&gt;A + B*x + C*log(D + E*x) = 0&lt;/code&gt; has the solutions in terms of &lt;code class=&quot;highlighter-rouge&quot;&gt;Lambert&lt;/code&gt; function as:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;D/E + C*B*W(t) with (B/C*E)*exp((BD - AE)/CE)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This is what &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; determines and accordingly returns the solutions, otherwise returns a &lt;code class=&quot;highlighter-rouge&quot;&gt;NotImplementedError&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; is unable to handle &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type()&lt;/code&gt; is tried. This function first tries to identify the type of composite bivariate and then substitutes &lt;code class=&quot;highlighter-rouge&quot;&gt;Dummy&lt;/code&gt; in place of them. For eq: &lt;code class=&quot;highlighter-rouge&quot;&gt;(x + y)**2 - 3&lt;/code&gt; would become &lt;code class=&quot;highlighter-rouge&quot;&gt;_u**2 - 3&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;_u&lt;/code&gt; is the dummy variable. The idea is that solving the latter equation for &lt;code class=&quot;highlighter-rouge&quot;&gt;u&lt;/code&gt; and then equating the solutions to the former equation is equivalent for solving the original one.&lt;/p&gt;
+
+&lt;p&gt;While implementing in &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; this philosophy needs to be applied. As of now I have looked into different tests on how they behave. I will start implementing it next.&lt;/p&gt;
+
+&lt;p&gt;Next week’s plan:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finishing with the logsolver&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Implementing lambert solver.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 8 - Improving solving of logarithmic equations</title>

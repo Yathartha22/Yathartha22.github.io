@@ -4,13 +4,434 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-08T11:14:17+05:30</updated>
+ <updated>2018-07-14T07:24:35+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 9 - Starting up with Lambert equations</title>
+   <link href="http://localhost:4000/gsoc-week-9"/>
+   <updated>2018-07-13T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-9</id>
+   <content type="html">&lt;p&gt;At the start of the week I worked on the leftovers of week 8:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;added &lt;code class=&quot;highlighter-rouge&quot;&gt;log_singularities()&lt;/code&gt; that will help in determining logarithmic singularities,&lt;/li&gt;
+  &lt;li&gt;improved documentation of all helpers as suggested by Amit to maintain consistency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Status of the PR’s:&lt;/p&gt;
+
+&lt;p&gt;PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;#14736&lt;/a&gt; is ready to be merged.&lt;/p&gt;
+
+&lt;p&gt;PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792&quot;&gt;#14792&lt;/a&gt; is being worked on. Major tasks has been completed, just review and refining has to be done.&lt;/p&gt;
+
+&lt;p&gt;Apart from this I started working on the way Lambert type equations can be solved through &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve()&lt;/code&gt;. I looked into &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve's&lt;/code&gt; way of handling such equations.
+For solving Lambert type equations &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve()&lt;/code&gt; largely depends on &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate.py&lt;/code&gt;. It takes help of the different utility functions implemented there.
+Of them two important are &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type()&lt;/code&gt;. These two helpers help in getting the equations evaluated.&lt;/p&gt;
+
+&lt;p&gt;Equations that can be written in the standard form as: &lt;code class=&quot;highlighter-rouge&quot;&gt;A + B*x + C*log(D + E*x) = 0&lt;/code&gt; has the solutions in terms of &lt;code class=&quot;highlighter-rouge&quot;&gt;Lambert&lt;/code&gt; function as:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;D/E + C*B*W(t) with (B/C*E)*exp((BD - AE)/CE)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This is what &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; determines and accordingly returns the solutions, otherwise returns a &lt;code class=&quot;highlighter-rouge&quot;&gt;NotImplementedError&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; is unable to handle &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type()&lt;/code&gt; is tried. This function first tries to identify the type of composite bivariate and then substitutes &lt;code class=&quot;highlighter-rouge&quot;&gt;Dummy&lt;/code&gt; in place of them. For eq: &lt;code class=&quot;highlighter-rouge&quot;&gt;(x + y)**2 - 3&lt;/code&gt; would become &lt;code class=&quot;highlighter-rouge&quot;&gt;_u**2 - 3&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;_u&lt;/code&gt; is the dummy variable. The idea is that solving the latter equation for &lt;code class=&quot;highlighter-rouge&quot;&gt;u&lt;/code&gt; and then equating the solutions to the former equation is equivalent for solving the original one.&lt;/p&gt;
+
+&lt;p&gt;While implementing in &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; this philosophy needs to be applied. As of now I have looked into different tests on how they behave. I will start implementing it next.&lt;/p&gt;
+
+&lt;p&gt;Next week’s plan:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finishing with the logsolver&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Implementing lambert solver.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 8 - Improving solving of logarithmic equations</title>
+   <link href="http://localhost:4000/gsoc-week-8"/>
+   <updated>2018-07-08T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-8</id>
+   <content type="html">&lt;p&gt;Before the start of the week Amit and I discussed on a few points on:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;is_logarithmic()&lt;/code&gt; is an identifier helper for &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; to determine whether the expression is logarithmic or not.
+      and &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_log()&lt;/code&gt; is a solving helper that returns the equation in a tractable form for &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; to better handle.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What should &lt;code class=&quot;highlighter-rouge&quot;&gt;is_logarithmic()&lt;/code&gt; return?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While designing the method at first it returned a &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombined&lt;/code&gt; equation if found to be logarithmic, but we agreed upon having consistency among all the identifying helpers to return either &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;_is_logarithmic()&lt;/code&gt; should work?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Next question was how it should work. We can implement it in two ways either to make the &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombined&lt;/code&gt; equation, if the expression reduces, it is obviously a logarithmic equation otherwise not. We also need to check whether the equation reduced has the variable to be solved in its &lt;code class=&quot;highlighter-rouge&quot;&gt;free_symbols&lt;/code&gt;
+But &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombine&lt;/code&gt; possessed a problem that it unknowingly manipulates the equation, like &lt;code class=&quot;highlighter-rouge&quot;&gt;log(x) - log(2*x)&lt;/code&gt; would reduce to &lt;code class=&quot;highlighter-rouge&quot;&gt;log(1/2)&lt;/code&gt; for which the routine would return &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt; as there are no symbol involved. So a more better way needs to be implemented.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_log()&lt;/code&gt; will handle removing unwanted solutions?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simply reducing the logarithmic equation to a tractable form for &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; to handle would cause spurious solutions in the result. Therefore it becomes necessary to remove them. Take for example: &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; gives the result of &lt;code class=&quot;highlighter-rouge&quot;&gt;log(x - 3) + log(x + 3)&lt;/code&gt; as &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-sqrt(10),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;sqrt(10)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;, but &lt;code class=&quot;highlighter-rouge&quot;&gt;-sqrt(10)&lt;/code&gt; is not the solution in &lt;code class=&quot;highlighter-rouge&quot;&gt;Real&lt;/code&gt; domain. Therefore one way to remove it was using &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol&lt;/code&gt;. Amit suggested on to have a look over the singularities and try incorporating the check in &lt;code class=&quot;highlighter-rouge&quot;&gt;_solveset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Things that I did during the week:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;improved &lt;code class=&quot;highlighter-rouge&quot;&gt;is_logarithmic()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Removed the &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombine&lt;/code&gt; way of checking the equation. As of now the &lt;code class=&quot;highlighter-rouge&quot;&gt;_is_logarithm&lt;/code&gt; checks for every term to be logarithmic in terms of the variable to be solved, if so it returns &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; otherwise &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;improved the &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_log()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As per the current documentation of &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; this routine is improved to return a modified form of the equation that &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; could better handle. Checking of the spurious solutions will take place in &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; itself.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Way to remove spurious solutions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To handle this scenario I have added a &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792/files#diff-eec0422923e8f100745c015cd8fdd6cfR985&quot;&gt;check&lt;/a&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;_solveset&lt;/code&gt; specifically for logarithmic equations to remove spurious solutions.
+The idea is based on the fact that natural log in undefined for negative and zero value, therefore this method gets each term of the expression, substitutes each solution to every term one by one and if for any term the value isn’t real that solution will not be included.&lt;/p&gt;
+
+&lt;p&gt;Why &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol()&lt;/code&gt; is not the appropriate way?&lt;/p&gt;
+
+&lt;p&gt;At first I thought of using the &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol()&lt;/code&gt;, but it possessed a problem. &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol&lt;/code&gt; unintensionally allows wrong solution to creep in. Take for example &lt;code class=&quot;highlighter-rouge&quot;&gt;log(3*x) - log(-x + 1) - log(4*x + 1)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; would give &lt;code class=&quot;highlighter-rouge&quot;&gt;-1/2 and 1/2&lt;/code&gt; as the solutions but the former isn’t a solution in real domain. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;checksol&lt;/code&gt; would not remove this as &lt;code class=&quot;highlighter-rouge&quot;&gt;I*pi&lt;/code&gt; gets cancelled out during evaluating the expression therefore it returns &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;, which is not correct.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Addressing comments&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from this few changes have been done in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;PR&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;I have added a method that would return all the terms present in the expression: &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/files#diff-eec0422923e8f100745c015cd8fdd6cfR988&quot;&gt;make_expr_args()&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Made the expresssion remain unevaluated when doing &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/files#diff-eec0422923e8f100745c015cd8fdd6cfR1299&quot;&gt;lhs - rhs&lt;/a&gt; within &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Read this &lt;a href=&quot;http://localhost:4000/gsoc-week-5&quot;&gt;blog&lt;/a&gt; for better understanding of logarithmic solving.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 7 - Continuing with transolve Part-IV</title>
+   <link href="http://localhost:4000/gsoc-week-7"/>
+   <updated>2018-07-01T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-7</id>
+   <content type="html">&lt;p&gt;This week I continued to work on finalising the design of the &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt;. Following were the things discussed and implemented:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The loop over the &lt;code class=&quot;highlighter-rouge&quot;&gt;rhs_s&lt;/code&gt; was removed because &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; already has a loop and since &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; is called within the loop therefore there won’t be a case where there would be more than one argument in &lt;code class=&quot;highlighter-rouge&quot;&gt;rhs_s&lt;/code&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pow_type()&lt;/code&gt; was created to handle power type equations in &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; but it turns out that power type equations will be handled in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_invert()&lt;/code&gt; itself, so it was repetitive to add again.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The names of the solving helpers were improved to &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_class&lt;/code&gt; from the previous &lt;code class=&quot;highlighter-rouge&quot;&gt;_class_solver&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Discussions with Amit and Chris led to the conclusion that &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; should be completely made an internal function of &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;, i.e. it should not be used as an independent function. At first the thought was that it can be used as an independent function, but this created a problem of the code being repeated as that of &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;, so Chris suggested that &lt;code class=&quot;highlighter-rouge&quot;&gt;_transolve&lt;/code&gt; should raise an error for equations that &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; can handle, but again this created problem, it would make unnnecessary complications in the code as we need to be very specific as to when and where raise an error.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We decided to have same arguments for all the helpers. Be it identification or solving helper, both will take the equation and the variable as their arguments, with the choice that the helper can ignore to use any of the argument if not needed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;There were a lot of improvement in the documentation as the design changed.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from these changes work in implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt; is going on in parallel.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 6 - Continuing with transolve Part-III</title>
+   <link href="http://localhost:4000/gsoc-week-6"/>
+   <updated>2018-06-23T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-6</id>
+   <content type="html">&lt;p&gt;For the sixth week, I started working on a few things as per the discussions with Amit:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Improving the API of &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; grew over the past few weeks the API became a bit messy, which was against the plan. So Amit suggested on to work on it to make it look clean. For this I added two internal functions &lt;code class=&quot;highlighter-rouge&quot;&gt;add_type()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;pow_type()&lt;/code&gt;, to handle expressions having &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;power&lt;/code&gt; terms respectively. This could help us in achieving what we planned of: making the API extensible without it getting affected from the changes done in the function itself. If new solvers are to be added the modifcation has to be done in either of the internal functions.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Improved the working of &lt;code class=&quot;highlighter-rouge&quot;&gt;_check_expo&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The implementation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;check_expo&lt;/code&gt; had a probelm, of not being generalised, only equations having two terms were checked. So the task was to make it generalised, so I implemented it using &lt;a href=&quot;http://docs.sympy.org/latest/modules/core.html#atom&quot;&gt;atoms&lt;/a&gt;, filtered the equations having &lt;code class=&quot;highlighter-rouge&quot;&gt;Pow&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;exp&lt;/code&gt; with the help of &lt;code class=&quot;highlighter-rouge&quot;&gt;.atoms()&lt;/code&gt; and then checked whether the variable that needs to be solved is present in the exponent or not but this too possesed a problem: asking for atoms was not a great choice as they can come from anywhere like &lt;code class=&quot;highlighter-rouge&quot;&gt;cos(2**x).atoms(Pow, exp)&lt;/code&gt; would give &lt;code class=&quot;highlighter-rouge&quot;&gt;2**x&lt;/code&gt; and consequently the helper would return &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;, which is wrong. For this &lt;a href=&quot;https://github.com/smichr&quot;&gt;smichr&lt;/a&gt; suggested even better method of using &lt;a href=&quot;https://github.com/sympy/sympy/blob/master/sympy/core/operations.py#L344&quot;&gt;.make_args()&lt;/a&gt;. We will seperate out all the &lt;code class=&quot;highlighter-rouge&quot;&gt;Add&lt;/code&gt; arguments and then in each of them we will look for &lt;code class=&quot;highlighter-rouge&quot;&gt;Mul&lt;/code&gt; arguments which will give us the atomic argument of the expression, now this term can be tested to have variable in the exponent.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Changes in the documentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also there were a few things that needed to fixed in the documentation. The docstring of &lt;code class=&quot;highlighter-rouge&quot;&gt;expo_solver&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;check_expo&lt;/code&gt; were improved. Few changes were also done in &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve's&lt;/code&gt; documentation.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Worked on improvement of &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apart from this I did some improvement in &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; to handle corner cases. As per the current logic &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; would return a “&lt;em&gt;logcombined&lt;/em&gt;” equation to be further solved by &lt;code class=&quot;highlighter-rouge&quot;&gt;log_solver&lt;/code&gt;, but this lead to a problem that the some equation (&lt;code class=&quot;highlighter-rouge&quot;&gt;log(x**y) - y*log(x)&lt;/code&gt;) might get reduced to &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; and the check would fail, therefore this was handled by improving the condition as &lt;code class=&quot;highlighter-rouge&quot;&gt;if condition not False&lt;/code&gt;. Apart from this single term expression needs to be properly handled.&lt;/p&gt;
+
+&lt;p&gt;Also I started getting familiar with &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert&lt;/code&gt; equations.&lt;/p&gt;
+
+&lt;p&gt;So these were the things that I worked on this week. The PR needs a bit more improvement to get merged, I will try to get it finished by mid of the coming week and start working on implementation of other solvers.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 5 - Implementing log solver</title>
+   <link href="http://localhost:4000/gsoc-week-5"/>
+   <updated>2018-06-17T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-5</id>
+   <content type="html">&lt;p&gt;So this is the last week of the first evaluation. I started with implementing log solver as part of &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;. As per the documentation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; we will need two helpers for implementing log solver, &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; that will check whether the equation is logarithmic or not and &lt;code class=&quot;highlighter-rouge&quot;&gt;log_solver&lt;/code&gt; that will solve the equation. Here’s the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792&quot;&gt;PR&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Heuristic is implemented to determine whether the equation is logarithmic or not. According to it the logarithmic equations can be reduced to simpler form using log identities. For this purpose we use SymPy’s function &lt;a href=&quot;http://docs.sympy.org/latest/tutorial/simplification.html#logcombine&quot;&gt;logcombine&lt;/a&gt;. If the equation is logarithmic it will be reduced and hence the number of log in the original and modified equation may differ. This will ensure that the equation is logarithmic.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind the log solver&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is simple, the reduced form from the &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; is used as the new target equation and is sent to &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; to handle. Solutions are retuned from &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;, but it may contain values that won’t satisfy the equation (log does not take negative values in real domain). Therfore to remove unwanted values we use &lt;a href=&quot;http://docs.sympy.org/latest/modules/solvers/solvers.html#sympy.solvers.solvers.checksol&quot;&gt;checksol&lt;/a&gt; function of solve module which substitutes each solution in the equation and returns &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; if it satisfies otherwise &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Apart from implementing helpers, I have added their documentation. Certain things needs to be done before the PR is ready for review: Tests needs to be added for the helpers and &lt;code class=&quot;highlighter-rouge&quot;&gt;check_log&lt;/code&gt; needs to be improved a bit to handle corner cases.&lt;/p&gt;
+
+&lt;p&gt;In parallel I am also working on improving &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve's&lt;/code&gt; PR to make it merge as soon as possible. After these two gets completely fixed we will be focusing on implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert equation solver&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the coming week I will be focussing on finishing off the work of these two PR.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 4 - Continuing with transolve Part-II</title>
+   <link href="http://localhost:4000/gsoc-week-4"/>
+   <updated>2018-06-09T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-4</id>
+   <content type="html">&lt;p&gt;By the end of the previous week I had completed majority of the TODO’s of the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR #14736&lt;/a&gt;.
+This week I started on minor improvements suggested by Amit. This included:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Minor Documentation changes&lt;br /&gt;
+Included proof of correctness, typo fixes, rephrasing lines etc.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Removing &lt;code class=&quot;highlighter-rouge&quot;&gt;flag&lt;/code&gt; variable from transolve.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;flag&lt;/code&gt; variable was passed as a function parameter in &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; and was used to check on the recursive call. The thought was that there might be a case when equation could not be solved by any of the helpers but during the process the equation might get modified, so we wanted to double check whether the modified equation could be solved again, thats why we used &lt;code class=&quot;highlighter-rouge&quot;&gt;flag&lt;/code&gt; but Amit suggested on removing it as there wasn’t a case as of now and it will only make things unnecessarily complicated.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Also worked on XFAILS, mainly on solving equations containing only symbols. There was an exception raised in &lt;code class=&quot;highlighter-rouge&quot;&gt;_invert_real&lt;/code&gt;, because of a relational comparison made with &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; which caused the faiure of the tests. It has been fixed by handling the exception.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Imported tests of log and lambert.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Another thing we discussed was about log solver. The helpers for solving logarithmic equations will be implemented in a seperated PR, to make the review and implementing task easy and independent.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After this I started a working on solving exponential equations in complex domain, though it turns out that we will be focussing on only the real domain as of now. But I have added tests for it as XFAIL.&lt;br /&gt;
+To make exponents work in complex domain, we require the &lt;a href=&quot;https://en.wikipedia.org/wiki/Complex_logarithm&quot;&gt;complex logarithm&lt;/a&gt;.
+If we have equation as&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	z = e**w,
+	where w is complex number and z is non-zero complex number,
+	then 
+	Ln(z) = ln|z| + I*(Arg(z) + 2*n*pi)
+	where Ln(z) is the complex logarithm and ln|z| is the
+        logarithm evaluated with real number argument.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Apart from this we also had a meeting yesterday in which we discussed about how we will be wrapping up things before the first evaluation.&lt;br /&gt;
+I will be completing few leftovers of the current PR to make it merge and start working on implementing log solver (making a commit probably by tomorrow).&lt;/p&gt;
+
+&lt;p&gt;Amit also suggested on creating a coverage report so as to get an idea about the amount of tests covered by the code. The current coverage report can be found &lt;a href=&quot;/covhtml/sympy_solvers_solveset_py.html&quot;&gt;here&lt;/a&gt;. Other than this he also advised on reading &lt;a href=&quot;https://www.investigatii.md/uploads/resurse/Clean_Code.pdf&quot;&gt;Clean Code&lt;/a&gt; by &lt;code class=&quot;highlighter-rouge&quot;&gt;Robert C. Martin&lt;/code&gt; which will help me improve in writing clean and efficient code.&lt;/p&gt;
+
+&lt;p&gt;The main target for the coming week will be merging &lt;code class=&quot;highlighter-rouge&quot;&gt;PR #14736&lt;/code&gt;, implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt; (will try to merge this as well), starting with implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert solver&lt;/code&gt; (try to add atleast a WIP PR) and reading the book.&lt;/p&gt;
+
+&lt;p&gt;Hope things go as planned!!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 3 - Continuing with transolve</title>
+   <link href="http://localhost:4000/gsoc-week-3"/>
+   <updated>2018-06-02T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-3</id>
+   <content type="html">&lt;p&gt;I continued my work of week 2 in this week as well. Though I was travelling for 2-3 days, I was able to give most of the hours to the work dedicated for this week. I had to add a detailed descriptive documentation for &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;, for this I read documentation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;ode&lt;/code&gt; module as Amit and Harsh suggested, apart from this I read several other documentation of sympy modules. Made a commit regarding this in the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As of now transolve supports solving majority of exponential equations.
+I have also imported exponential tests of solve and added a few of mine. Some of them needs another look, I have added them to &lt;code class=&quot;highlighter-rouge&quot;&gt;XFAIL&lt;/code&gt; as of now. I am working on these tests to pass. Also done minor changes in the function, like removed &lt;code class=&quot;highlighter-rouge&quot;&gt;force=True&lt;/code&gt; option from &lt;code class=&quot;highlighter-rouge&quot;&gt;expand_log&lt;/code&gt; because using this option is not a healthy choice as the function expands logarithm without considering the assumptions (for exponents the variable should be real) which may sometime get a wrong result.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is simple, we are mainly focusing on making it modular and extensible. So to achieve this different identifying and solving helpers will be implemented that will identify the type of equation and then solve it. For detailed information refer to the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736/&quot;&gt;PR&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Idea behind &lt;code class=&quot;highlighter-rouge&quot;&gt;exponential solver&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Exponential equations are solved by using logarithms. Currently the &lt;code class=&quot;highlighter-rouge&quot;&gt;expo_solver&lt;/code&gt; reduces the equation to log form which can further be handled by solveset itself. For this purpose &lt;a href=&quot;http://docs.sympy.org/latest/tutorial/simplification.html#expand-log&quot;&gt;expand_log&lt;/a&gt; function of sympy is used which reduces the equation using log identities.
+Take for example a simple exponential equation &lt;code class=&quot;highlighter-rouge&quot;&gt;3**(2*x) - 2**(x + 3)&lt;/code&gt;, this equation can be reduced to &lt;code class=&quot;highlighter-rouge&quot;&gt;2*x*log(3) - (x+3)*log(2)&lt;/code&gt;, this type of equation is easily solvable by &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once we approve on the documentation and the working of exponential solver I will proceed to implement logarithmic solver (probably in the coming week).&lt;/p&gt;
+
+&lt;p&gt;Hope things go as planned!!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 2 - Getting started with transolve</title>
+   <link href="http://localhost:4000/gsoc-week-2"/>
+   <updated>2018-05-27T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-2</id>
+   <content type="html">&lt;p&gt;So this is the end of the second week of GSoC and I am still working on implementing and improving &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;. In the previous week Amit and I discussed about the things that are necessary for implementing &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;. I have covered it in the previous &lt;a href=&quot;https://yathartha22.github.io//gsoc-week-1&quot;&gt;blog post&lt;/a&gt;. Based on the discussions I have a submitted a WIP PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the second meeting we had &lt;a href=&quot;https://github.com/hargup&quot;&gt;Harsh&lt;/a&gt; joining us to the discussion.&lt;/p&gt;
+
+&lt;p&gt;Amit and Harsh stressed on making transolve modular and extensilbe, unlike &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve&lt;/code&gt; which lacks these features (though it is very powerful).&lt;/p&gt;
+
+&lt;p&gt;So there are few things that &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; should have:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Proper documentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Documentation is always a very important aspect of any software. Therefore to make it easy to understand to the users, transolve needs to have a proper descriptive documentation that should explain why, what and how of transolve. Amit suggested on covering every detail of the working of function. It should cover the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- What is transolve.
+- How to use transolve.
+- Why it is better than `_tsolve`.
+- How equations are solved.
+- How to add a new class of equations.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Extensibility&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; should be extensible, i.e. the design of the API should be such that it becomes easy to add a new class of equation solver without affecting the structure of the function.
+The idea to make this happen is to have a two step procedure of equation solving. &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; will solve any equation by first identifying the class of the equations (a helper will do that) and then calling another helper to solve that equation. So in this way one needs to figure out how to identify the equation and how to solve it. Once this is done he just needs to invoke the helpers at the proper location in transolve.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Modularity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As it is clear from the above point, &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; will have two step procedure for solving different classes of equations. Helper function needs to be implemented for identification and solving equations. This will make &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt; modular as solving equations will not depend on the main function.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Proof of correctness&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since identification and solving equations will be achieved with few heuristics/algorithms. There should be a proper document of its prof of correctness. I will be adding proper documentation with examples explaining its authenticity.&lt;/p&gt;
+
+&lt;p&gt;Apart from this Amit also adviced on reading documentation of &lt;a href=&quot;https://github.com/sympy/sympy/blob/master/sympy/solvers/ode.py&quot;&gt;ode&lt;/a&gt; module so as to get an idea, also importing tests from solve, making it atleast as powerful as _tsolve will be other things that needs care.&lt;/p&gt;
+
+&lt;p&gt;I will be focussing on completing it by this week!!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>GSoC 2018 - Week 1 - Starting up</title>
+   <link href="http://localhost:4000/gsoc-week-1"/>
+   <updated>2018-05-20T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-1</id>
+   <content type="html">&lt;p&gt;So the coding period started from 14 May 2018. So most of the days of the first week I spent was giving final exams and travelling. But now everything is over and I will be spending most of the time implementing what I have proposed for the first evaluations. I had a meeting with Amit during the community bonding period where we discussed :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Schedule and frequency of meetings.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to proceed with implementing transolve, documenting and writing tests for it.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As of now I have looked few things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How &lt;code class=&quot;highlighter-rouge&quot;&gt;_tsolve&lt;/code&gt; works in &lt;code class=&quot;highlighter-rouge&quot;&gt;solve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How exponential and logarithmic equations are solved.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Filtering out the tests for the above.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Figuring out how the API would look like.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What will be the flow of &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The last two points needs more discussions and planning. In the coming week I will try to figure it out by dicussing it with Amit and by the end I will try to make an initial commit to &lt;code class=&quot;highlighter-rouge&quot;&gt;transolve&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hope I execute the plan well!!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Got Selectd in GSoC</title>
+   <link href="http://localhost:4000/gsoc-selection"/>
+   <updated>2018-04-29T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-selection</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/public/gsoc.png&quot; style=&quot;width:30%;height:30%;float:left;&quot; /&gt;
+&lt;img src=&quot;/public/sympy.png&quot; style=&quot;width:25%;height:25%;float:right;margin-right:100px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+Sorry for the late post!!&lt;/p&gt;
+
+&lt;p&gt;The results of &lt;strong&gt;&lt;a href=&quot;https://summerofcode.withgoogle.com/organizations/5583344046178304/#6097058637807616&quot;&gt;Google Summer of Code&lt;/a&gt;&lt;/strong&gt; were out on 23 April 2018 and guess what I got selected and will be working under &lt;strong&gt;&lt;a href=&quot;http://sympy.org&quot;&gt;Sympy&lt;/a&gt;&lt;/strong&gt; for the next 3 months. I will be working on my project, &lt;a href=&quot;https://docs.google.com/document/d/1kcZCdQuY3XxgHPuSA8vvwc6O8AbVZ-nYskMuXIia9hA/edit?usp=sharing&quot;&gt;Solvers: Completing Solveset&lt;/a&gt;, during this period. I am really excited to work with such an amazing organization. I would like to thank all the mentors especially &lt;a href=&quot;https://github.com/asmeurer&quot;&gt;Aaron Meurer&lt;/a&gt;, &lt;a href=&quot;https://github.com/smichr&quot;&gt;Christopher Smith&lt;/a&gt;, &lt;a href=&quot;https://github.com/aktech&quot;&gt;Amit Kumar&lt;/a&gt; and &lt;a href=&quot;https://github.com/jksuom&quot;&gt;Kalevi Suominen&lt;/a&gt; for guiding me in my proposal and PR’s. My official mentor will be &lt;strong&gt;Amit Kumar&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first phase is the &lt;em&gt;Community Bonding Period&lt;/em&gt;, I will focussing on the following things before the coding period begans.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Setting up blog and synchronizing it with planet sympy.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Discussing possible means of communication, weekly meetings etc.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Planning the implementation of the project with Amit.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Familiarizing with the codebase of Sympy and see how it may help solving the problems while implementing the project.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will be having my end sems and practicals during this period but I will try to accomplish the above tasks whenever I get time.&lt;/p&gt;
+
+&lt;p&gt;Looking forward for a wonderful summer ahead 😄	!!&lt;/p&gt;
+
+</content>
+ </entry>
  
 
 </feed>
