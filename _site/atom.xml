@@ -4,13 +4,53 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-14T07:24:35+05:30</updated>
+ <updated>2018-07-23T09:22:44+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 10 - Continuing with logarithmic solver</title>
+   <link href="http://localhost:4000/gsoc-week-10"/>
+   <updated>2018-07-22T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-10</id>
+   <content type="html">&lt;p&gt;This week started with the merge of the PR &lt;a href=&quot;https://github.com/sympy/sympy/pull/14736&quot;&gt;#14736&lt;/a&gt;. Yehhhh!!!!!. So now &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; will be able to solve a varied type of exponential equations.  Next work is going on to build the logarithmic and lambert solver.&lt;/p&gt;
+
+&lt;p&gt;A lot of discussion has been taken place over the implementation of the logarithmic solver, there were mainly two points to consider:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How the logarithmic equation gets evaluated, i.e., should we consider solutions that would make the log term negative.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Take for instance a logarithmic equation &lt;code class=&quot;highlighter-rouge&quot;&gt;log(x - 3) + log(x + 3) = 0&lt;/code&gt;, when solved the solutions would be &lt;code class=&quot;highlighter-rouge&quot;&gt;-sqrt(10) and sqrt(10)&lt;/code&gt;, but &lt;code class=&quot;highlighter-rouge&quot;&gt;-sqrt(10)&lt;/code&gt; make the log term negative. So the question was what should we do for such a scenario? Should we add a check to remove these solution or just accept. it.&lt;/p&gt;
+
+&lt;p&gt;As of now as suggested by &lt;a href=&quot;https://github.com/jksuom&quot;&gt;Kalevi&lt;/a&gt; and &lt;a href=&quot;https://github.com/asmeurer&quot;&gt;Aaron&lt;/a&gt; we should focus on the liberal interpratation for evaluating equations: if an expression can be written in its equivalent form and makes sense then we can consider solutions of this equivalent form. Therefore both the above solutions are acceptable.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How the identification of the logarithmic equations would take place.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The identification of logarithmic type is another question and is still yet to be agreed upon. At first the implementation was done by extracting each term of the expression and see if it has &lt;code class=&quot;highlighter-rouge&quot;&gt;log&lt;/code&gt; terms in it, this wasn’t the best of the method as we are trying to identify a large class of logarithmic equation while solving is done only for a subset of those equations (only those that can be reduced by &lt;code class=&quot;highlighter-rouge&quot;&gt;logcombine&lt;/code&gt;). So Amit and Chris stressed upon making the logarithmic identification for equations that its solver would solve. So as of now I have made changes accordingly.&lt;/p&gt;
+
+&lt;p&gt;Another problem that this PR is facing is of the infinite recursion. The equations that both exponential and logarithmic can’t solve but still their respective solver try to handle gets into infinite recursion. One way (though not appropriate) is to use &lt;code class=&quot;highlighter-rouge&quot;&gt;flags&lt;/code&gt; like in &lt;code class=&quot;highlighter-rouge&quot;&gt;solve&lt;/code&gt;, using this would remove the infinite recursion but is not the best way to  handle, therefore I am looking into ways on how to get this fixed.&lt;/p&gt;
+
+&lt;p&gt;Apart from the work on log solver, I did some work on lambert solver- how the implementation would go, ran all the tests of &lt;code class=&quot;highlighter-rouge&quot;&gt;solve&lt;/code&gt;, differentiated the tests that &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert&lt;/code&gt; could solve and that &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; would. I will be adding a PR for this in a day or so.&lt;/p&gt;
+
+&lt;p&gt;Next week goals:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finish things with logarithmic solver&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sending a PR for lambert solver and try to finish its work as quickly as possible.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 9 - Starting up with Lambert equations</title>

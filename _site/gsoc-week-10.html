@@ -11,7 +11,7 @@
 
   <title>
     
-      Python Script to get NASA's APOD &middot; Yathartha Joshi
+      GSoC 2018 - Week 10 - Continuing with logarithmic solver &middot; Yathartha Joshi
     
 
   </title>
@@ -147,15 +147,40 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Python Script to get NASA's APOD</h1>
-  <span class="post-date">05 Jul 2017</span>
-   <p>I have always been worried about my desktop’s wallpaper. I find it a bit tedious to search the web for an image, download it and set it as my desktop’s wallpaper. So I thought to write a <code class="highlighter-rouge">python script</code> that would do the job for me.</p>
+  <h1 class="post-title">GSoC 2018 - Week 10 - Continuing with logarithmic solver</h1>
+  <span class="post-date">22 Jul 2018</span>
+   <p>This week started with the merge of the PR <a href="https://github.com/sympy/sympy/pull/14736">#14736</a>. Yehhhh!!!!!. So now <code class="highlighter-rouge">solveset</code> will be able to solve a varied type of exponential equations.  Next work is going on to build the logarithmic and lambert solver.</p>
 
-<p>Being a bit enthusiast about space and astronomy, I thought to get wallpapers from NASA’s official site, and therefore I wrote the script. The script actually gets the wallpaper from <code class="highlighter-rouge">NASA's APOD(Astronomy Picture Of the Day)</code> and sets it as your desktop wallpaper. So here is my github link to the script.</p>
+<p>A lot of discussion has been taken place over the implementation of the logarithmic solver, there were mainly two points to consider:</p>
 
-<p><a href="https://github.com/Yathartha22/nasa">NASA APOD script</a>. Currently it works on Linux OS, I will try to make it platform independent.</p>
+<ul>
+  <li>How the logarithmic equation gets evaluated, i.e., should we consider solutions that would make the log term negative.</li>
+</ul>
 
-<p>Till then enjoy with amazing and cool space pics from NASA 😃</p>
+<p>Take for instance a logarithmic equation <code class="highlighter-rouge">log(x - 3) + log(x + 3) = 0</code>, when solved the solutions would be <code class="highlighter-rouge">-sqrt(10) and sqrt(10)</code>, but <code class="highlighter-rouge">-sqrt(10)</code> make the log term negative. So the question was what should we do for such a scenario? Should we add a check to remove these solution or just accept. it.</p>
+
+<p>As of now as suggested by <a href="https://github.com/jksuom">Kalevi</a> and <a href="https://github.com/asmeurer">Aaron</a> we should focus on the liberal interpratation for evaluating equations: if an expression can be written in its equivalent form and makes sense then we can consider solutions of this equivalent form. Therefore both the above solutions are acceptable.</p>
+
+<ul>
+  <li>How the identification of the logarithmic equations would take place.</li>
+</ul>
+
+<p>The identification of logarithmic type is another question and is still yet to be agreed upon. At first the implementation was done by extracting each term of the expression and see if it has <code class="highlighter-rouge">log</code> terms in it, this wasn’t the best of the method as we are trying to identify a large class of logarithmic equation while solving is done only for a subset of those equations (only those that can be reduced by <code class="highlighter-rouge">logcombine</code>). So Amit and Chris stressed upon making the logarithmic identification for equations that its solver would solve. So as of now I have made changes accordingly.</p>
+
+<p>Another problem that this PR is facing is of the infinite recursion. The equations that both exponential and logarithmic can’t solve but still their respective solver try to handle gets into infinite recursion. One way (though not appropriate) is to use <code class="highlighter-rouge">flags</code> like in <code class="highlighter-rouge">solve</code>, using this would remove the infinite recursion but is not the best way to  handle, therefore I am looking into ways on how to get this fixed.</p>
+
+<p>Apart from the work on log solver, I did some work on lambert solver- how the implementation would go, ran all the tests of <code class="highlighter-rouge">solve</code>, differentiated the tests that <code class="highlighter-rouge">_solve_lambert</code> could solve and that <code class="highlighter-rouge">bivariate_type</code> would. I will be adding a PR for this in a day or so.</p>
+
+<p>Next week goals:</p>
+
+<ul>
+  <li>
+    <p>Finish things with logarithmic solver</p>
+  </li>
+  <li>
+    <p>Sending a PR for lambert solver and try to finish its work as quickly as possible.</p>
+  </li>
+</ul>
 
 <a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -185,15 +210,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
-          <a href="/gsoc-week-10">
-            GSoC 2018 - Week 10 - Continuing with logarithmic solver
-            <small>22 Jul 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/gsoc-week-9">
             GSoC 2018 - Week 9 - Starting up with Lambert equations
             <small>13 Jul 2018</small>
@@ -206,6 +222,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-8">
             GSoC 2018 - Week 8 - Improving solving of logarithmic equations
             <small>08 Jul 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-7">
+            GSoC 2018 - Week 7 - Continuing with transolve Part-IV
+            <small>01 Jul 2018</small>
           </a>
         </h3>
       </li>
