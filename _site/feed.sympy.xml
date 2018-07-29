@@ -4,13 +4,42 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-23T09:22:44+05:30</updated>
+ <updated>2018-07-29T10:28:43+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver</title>
+   <link href="http://localhost:4000/gsoc-week-11"/>
+   <updated>2018-07-29T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-11</id>
+   <content type="html">&lt;p&gt;So this week I started up with implementing and sending a PR for lambert solver &lt;a href=&quot;https://github.com/sympy/sympy/pull/14972&quot;&gt;#14972&lt;/a&gt;. Solving these equations can be achieved by &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert&lt;/code&gt; routine of &lt;a href=&quot;https://github.com/sympy/sympy/blob/master/sympy/solvers/bivariate.py&quot;&gt;bivariate.py&lt;/a&gt;. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; in the PR. I will add &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.&lt;/p&gt;
+
+&lt;p&gt;Apart from this, a lot of work was done in the &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt; PR&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_term_factors()&lt;/code&gt; is used again.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Logic for exponential identifying is modified to not identify lambert type equations&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Few mores tests were added.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/smichr&quot;&gt;Chris&lt;/a&gt; advised to make identification helpers such that they identify their class even if they won’t get solved by their respective solvers, the equation should not be passed to any of the other helpers for further solving. This wasn’t the case before, the identifying helpers were implemented only for equations that their helpers could solve. So now this idea is implemented for both the exponential and logarithmic solver.
+Equations that these identifiers can’t identify will be further solved as lambert type.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Almost all the work of the log solver PR is done. I will be finishing the work on lambert solver PR and complete in coming week. I hope both the PR’s gets merged before the GSoC period ends.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 10 - Continuing with logarithmic solver</title>

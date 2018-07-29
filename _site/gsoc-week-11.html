@@ -11,7 +11,7 @@
 
   <title>
     
-      Yathartha Joshi &middot; Open Source Enthusiast
+      GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver &middot; Yathartha Joshi
     
 
   </title>
@@ -146,146 +146,103 @@
       </div>
 
       <div class="container content">
-        <!doctype html>
-<html>
-
-<head>
-
-<!-- gogle adsense -->
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-5800881114676218",
-    enable_page_level_ads: true
-  });
-</script>
- <!-- script ended -->
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-
-
-
-<div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/gsoc-week-11">
-        GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver
-      </a>
-    </h1>
-
-    <span class="post-date">29 Jul 2018</span>
+        <div class="post">
+  <h1 class="post-title">GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver</h1>
+  <span class="post-date">29 Jul 2018</span>
    <p>So this week I started up with implementing and sending a PR for lambert solver <a href="https://github.com/sympy/sympy/pull/14972">#14972</a>. Solving these equations can be achieved by <code class="highlighter-rouge">_solve_lambert</code> routine of <a href="https://github.com/sympy/sympy/blob/master/sympy/solvers/bivariate.py">bivariate.py</a>. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the <code class="highlighter-rouge">bivariate_type</code> to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added <code class="highlighter-rouge">_solve_lambert()</code> in the PR. I will add <code class="highlighter-rouge">bivariate_type</code> once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.</p>
 
- 
-     
-     
-    
-    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-11" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
-    </p>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/gsoc-week-10">
-        GSoC 2018 - Week 10 - Continuing with logarithmic solver
-      </a>
-    </h1>
-
-    <span class="post-date">22 Jul 2018</span>
-   <p>This week started with the merge of the PR <a href="https://github.com/sympy/sympy/pull/14736">#14736</a>. Yehhhh!!!!!. So now <code class="highlighter-rouge">solveset</code> will be able to solve a varied type of exponential equations.  Next work is going on to build the logarithmic and lambert solver.</p>
-
- 
-     
-     
-    
-    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-10" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
-    </p>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/gsoc-week-9">
-        GSoC 2018 - Week 9 - Starting up with Lambert equations
-      </a>
-    </h1>
-
-    <span class="post-date">13 Jul 2018</span>
-   <p>At the start of the week I worked on the leftovers of week 8:</p>
-
- 
-     
-     
-    
-    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-9" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
-    </p>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/gsoc-week-8">
-        GSoC 2018 - Week 8 - Improving solving of logarithmic equations
-      </a>
-    </h1>
-
-    <span class="post-date">08 Jul 2018</span>
-   <p>Before the start of the week Amit and I discussed on a few points on:</p>
-
- 
-     
-     
-    
-    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-8" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
-    </p>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/gsoc-week-7">
-        GSoC 2018 - Week 7 - Continuing with transolve Part-IV
-      </a>
-    </h1>
-
-    <span class="post-date">01 Jul 2018</span>
-   <p>This week I continued to work on finalising the design of the <code class="highlighter-rouge">_transolve</code>. Following were the things discussed and implemented:</p>
+<p>Apart from this, a lot of work was done in the <code class="highlighter-rouge">log solver</code> PR</p>
 
 <ul>
-  <li>The loop over the <code class="highlighter-rouge">rhs_s</code> was removed because <code class="highlighter-rouge">solveset</code> already has a loop and since <code class="highlighter-rouge">_transolve</code> is called within the loop therefore there won’t be a case where there would be more than one argument in <code class="highlighter-rouge">rhs_s</code> inside <code class="highlighter-rouge">_transolve</code>.</li>
+  <li>
+    <p><code class="highlighter-rouge">_term_factors()</code> is used again.</p>
+  </li>
+  <li>
+    <p>Logic for exponential identifying is modified to not identify lambert type equations</p>
+  </li>
+  <li>
+    <p>Few mores tests were added.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/smichr">Chris</a> advised to make identification helpers such that they identify their class even if they won’t get solved by their respective solvers, the equation should not be passed to any of the other helpers for further solving. This wasn’t the case before, the identifying helpers were implemented only for equations that their helpers could solve. So now this idea is implemented for both the exponential and logarithmic solver.
+Equations that these identifiers can’t identify will be further solved as lambert type.</p>
+  </li>
 </ul>
 
- 
-     
-     
-    
-    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-7" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
-    </p>
-    
+<p>Almost all the work of the log solver PR is done. I will be finishing the work on lambert solver PR and complete in coming week. I hope both the PR’s gets merged before the GSoC period ends.</p>
 
-  </div>
-  
+<a class="github-button" href="https://github.com/Yathartha22" data-size="large" aria-label="Follow @Yathartha22 on GitHub">Follow 	             @Yathartha22</a>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+   
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES * * */
+var disqus_shortname = 'yathartha22-github-io' ;
+
+ /* * * DON'T EDIT BELOW THIS LINE * * */
+ (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+ </div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-10">
+            GSoC 2018 - Week 10 - Continuing with logarithmic solver
+            <small>22 Jul 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-9">
+            GSoC 2018 - Week 9 - Starting up with Lambert equations
+            <small>13 Jul 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/gsoc-week-8">
+            GSoC 2018 - Week 8 - Improving solving of logarithmic equations
+            <small>08 Jul 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
 
-<div class="pagination"> 
-  
-    <a class="pagination-item older" href="/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
-</div>
-
-</html>
         
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES * * */
+var disqus_shortname = 'yathartha22-github-io' ;
+
+ /* * * DON'T EDIT BELOW THIS LINE * * */
+ (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
       </div>
