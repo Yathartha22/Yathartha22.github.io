@@ -171,13 +171,33 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="http://localhost:4000/gsoc-week-12">
+        GSoC 2018 - Week 12 - Continuing with logarithmic solver and implementing lambert solver Part-II
+      </a>
+    </h1>
+
+    <span class="post-date">09 Aug 2018</span>
+   <p>This week I continued the work with log solver and lambert solver. The log solver implementation is almost done with just few check for assumptions. Symbolic logarithmic equations should be dealt with proper assumptions. Such equations would give unsolved instance of <code class="highlighter-rouge">ConditionSet</code> otherwise.</p>
+
+ 
+     
+     
+    
+    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-12" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
+    </p>
+    
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="http://localhost:4000/gsoc-week-11">
         GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver
       </a>
     </h1>
 
     <span class="post-date">29 Jul 2018</span>
-   <p>So this week I started up with implementing and sending a PR for lambert solver <a href="https://github.com/sympy/sympy/pull/14972">#14972</a>. Solving these equations can be achieved by <code class="highlighter-rouge">_solve_lambert</code> routine of <a href="https://github.com/sympy/sympy/blob/master/sympy/solvers/bivariate.py">bivariate.py</a>. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the <code class="highlighter-rouge">bivariate_type</code> to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added <code class="highlighter-rouge">_solve_lambert()</code> in the PR. I will add <code class="highlighter-rouge">bivariate_type</code> once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.</p>
+   <p>So this week I started up with implementing and sending a PR for lambert solver <a href="https://github.com/sympy/sympy/pull/14972">#14972</a>. Solving these equations can be achieved by <code class="highlighter-rouge">_solve_lambert</code> routine of <a href="https://github.com/sympy/sympy/blob/2b4afb6cd0a7cd5791d512b80fce493cda9b57e0/sympy/solvers/bivariate.py">bivariate.py</a>. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the <code class="highlighter-rouge">bivariate_type</code> to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added <code class="highlighter-rouge">_solve_lambert()</code> in the PR. I will add <code class="highlighter-rouge">bivariate_type</code> once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.</p>
 
  
      
@@ -244,30 +264,6 @@
      
     
     <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-8" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
-    </p>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:4000/gsoc-week-7">
-        GSoC 2018 - Week 7 - Continuing with transolve Part-IV
-      </a>
-    </h1>
-
-    <span class="post-date">01 Jul 2018</span>
-   <p>This week I continued to work on finalising the design of the <code class="highlighter-rouge">_transolve</code>. Following were the things discussed and implemented:</p>
-
-<ul>
-  <li>The loop over the <code class="highlighter-rouge">rhs_s</code> was removed because <code class="highlighter-rouge">solveset</code> already has a loop and since <code class="highlighter-rouge">_transolve</code> is called within the loop therefore there won’t be a case where there would be more than one argument in <code class="highlighter-rouge">rhs_s</code> inside <code class="highlighter-rouge">_transolve</code>.</li>
-</ul>
-
- 
-     
-     
-    
-    <p><a class="btn btn-sm btn-primary" href="http://localhost:4000/gsoc-week-7" role="button">Read more <i class="fa fa-arrow-circle-right"></i></a>
     </p>
     
 

@@ -4,7 +4,7 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-29T10:28:43+05:30</updated>
+ <updated>2018-08-10T11:51:16+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
@@ -13,11 +13,72 @@
 
  
  <entry>
+   <title>GSoC 2018 - Week 12 - Continuing with logarithmic solver and implementing lambert solver Part-II</title>
+   <link href="http://localhost:4000/gsoc-week-12"/>
+   <updated>2018-08-09T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-week-12</id>
+   <content type="html">&lt;p&gt;This week I continued the work with log solver and lambert solver. The log solver implementation is almost done with just few check for assumptions. Symbolic logarithmic equations should be dealt with proper assumptions. Such equations would give unsolved instance of &lt;code class=&quot;highlighter-rouge&quot;&gt;ConditionSet&lt;/code&gt; otherwise.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a, b, x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solveset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Reals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ConditionSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Reals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# because the bases (here, `a and b`) should have a positive value &amp;gt; 0)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;positive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solveset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Reals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Discussions with Amit and Chris suggested that there should be some other way to handle vanilla symbols. There should be atleast a &lt;code class=&quot;highlighter-rouge&quot;&gt;ValueError&lt;/code&gt; or something else that would tell the user why this cannot be solved. Chris suggested of returning a &lt;code class=&quot;highlighter-rouge&quot;&gt;Piecewise&lt;/code&gt; as  object for this scenario. Something like:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cond&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fuzzy_and&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Piecewise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;solutions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConditionSet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;........&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;  &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Using Piecewise was not the greatest of the option as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Though the assumptions were checked but it didn’t provided information to the user that why did it not solved.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Also using &lt;code class=&quot;highlighter-rouge&quot;&gt;Piecewise&lt;/code&gt; had some problem causing recursion error, though it could be solved but it would make things unncessarily complicated.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Also &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; is not made to return objects other than &lt;code class=&quot;highlighter-rouge&quot;&gt;Sets&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So we switched to a completely different approach. We tried using a different type of &lt;code class=&quot;highlighter-rouge&quot;&gt;ConditionSet&lt;/code&gt;: providing the information within it that is necessary for the equation to be solved. The approach was: &lt;em&gt;Force the equation to get solved but return a ConditionSet (a different than ususal) with the required assumptions, like:&lt;/em&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ConditionSet(x, And(a_base&amp;gt;0, b_base&amp;gt;0, Eq(im(a_exp), 0), Eq((im(b_exp), 0))), {solutions})&lt;/code&gt;. So now the above equation would return solutions something like:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ConditionSet(x, (a &amp;gt; 0) &amp;amp; (b &amp;gt; 0), Intersection(Reals, {log(b)/(log(a) - log(b))}))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So this approach has been applied in the &lt;a href=&quot;https://github.com/sympy/sympy/pull/14792&quot;&gt;PR&lt;/a&gt; as of now, only a few minor changes needs to be done. I will try to finish this by the end of the week.&lt;/p&gt;
+
+&lt;p&gt;Apart from this some work has been done in &lt;code class=&quot;highlighter-rouge&quot;&gt;lambert solver&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Used &lt;code class=&quot;highlighter-rouge&quot;&gt;_is_lambert&lt;/code&gt; to identify lambert type equations.&lt;/li&gt;
+  &lt;li&gt;Implemented bivariate solver (I will add a commit for this soon).&lt;/li&gt;
+  &lt;li&gt;Ran &lt;code class=&quot;highlighter-rouge&quot;&gt;solve&lt;/code&gt;’s tests, to get an idea of the extent to which &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; would handle such equations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;What’s next:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I will try to wrap up the work of both the PR’s. Lambert solver PR would need a bit more time for reviewing but nevertheless I will be continuing its work post GSoC. Implementing these two solvers will make &lt;code class=&quot;highlighter-rouge&quot;&gt;solveset&lt;/code&gt; fully functional to handle transcendental equations which is a major part of my GSoC propsal. There will be a few minor things left that I will try to finish post GSoC. Also since this is the last week for the coding period, I will be needing to submit a final report of my work, I will complete and submit it before the deadline.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver</title>
    <link href="http://localhost:4000/gsoc-week-11"/>
    <updated>2018-07-29T00:00:00+05:30</updated>
    <id>http://localhost:4000/gsoc-week-11</id>
-   <content type="html">&lt;p&gt;So this week I started up with implementing and sending a PR for lambert solver &lt;a href=&quot;https://github.com/sympy/sympy/pull/14972&quot;&gt;#14972&lt;/a&gt;. Solving these equations can be achieved by &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert&lt;/code&gt; routine of &lt;a href=&quot;https://github.com/sympy/sympy/blob/master/sympy/solvers/bivariate.py&quot;&gt;bivariate.py&lt;/a&gt;. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; in the PR. I will add &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.&lt;/p&gt;
+   <content type="html">&lt;p&gt;So this week I started up with implementing and sending a PR for lambert solver &lt;a href=&quot;https://github.com/sympy/sympy/pull/14972&quot;&gt;#14972&lt;/a&gt;. Solving these equations can be achieved by &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert&lt;/code&gt; routine of &lt;a href=&quot;https://github.com/sympy/sympy/blob/2b4afb6cd0a7cd5791d512b80fce493cda9b57e0/sympy/solvers/bivariate.py&quot;&gt;bivariate.py&lt;/a&gt;. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added &lt;code class=&quot;highlighter-rouge&quot;&gt;_solve_lambert()&lt;/code&gt; in the PR. I will add &lt;code class=&quot;highlighter-rouge&quot;&gt;bivariate_type&lt;/code&gt; once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.&lt;/p&gt;
 
 &lt;p&gt;Apart from this, a lot of work was done in the &lt;code class=&quot;highlighter-rouge&quot;&gt;log solver&lt;/code&gt; PR&lt;/p&gt;
 

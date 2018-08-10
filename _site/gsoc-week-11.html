@@ -149,7 +149,7 @@
         <div class="post">
   <h1 class="post-title">GSoC 2018 - Week 11 - Continuing with logarithmic solver and implementing lambert solver</h1>
   <span class="post-date">29 Jul 2018</span>
-   <p>So this week I started up with implementing and sending a PR for lambert solver <a href="https://github.com/sympy/sympy/pull/14972">#14972</a>. Solving these equations can be achieved by <code class="highlighter-rouge">_solve_lambert</code> routine of <a href="https://github.com/sympy/sympy/blob/master/sympy/solvers/bivariate.py">bivariate.py</a>. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the <code class="highlighter-rouge">bivariate_type</code> to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added <code class="highlighter-rouge">_solve_lambert()</code> in the PR. I will add <code class="highlighter-rouge">bivariate_type</code> once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.</p>
+   <p>So this week I started up with implementing and sending a PR for lambert solver <a href="https://github.com/sympy/sympy/pull/14972">#14972</a>. Solving these equations can be achieved by <code class="highlighter-rouge">_solve_lambert</code> routine of <a href="https://github.com/sympy/sympy/blob/2b4afb6cd0a7cd5791d512b80fce493cda9b57e0/sympy/solvers/bivariate.py">bivariate.py</a>. It is really powerful and can solve a varied type of equations having a general form. Another routine comes into action, the <code class="highlighter-rouge">bivariate_type</code> to solve majorly lambert type of equations when the former is unable to solve. These two routines can be handy for implementing such equations. As of now I have added <code class="highlighter-rouge">_solve_lambert()</code> in the PR. I will add <code class="highlighter-rouge">bivariate_type</code> once the log solver PR gets finalised. There are few equations that can be solved by posifying the variable that needs to be solved. A bit discussion is needed on this part.</p>
 
 <p>Apart from this, a lot of work was done in the <code class="highlighter-rouge">log solver</code> PR</p>
 
@@ -199,6 +199,15 @@ var disqus_shortname = 'yathartha22-github-io' ;
     
       <li>
         <h3>
+          <a href="/gsoc-week-12">
+            GSoC 2018 - Week 12 - Continuing with logarithmic solver and implementing lambert solver Part-II
+            <small>09 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/gsoc-week-10">
             GSoC 2018 - Week 10 - Continuing with logarithmic solver
             <small>22 Jul 2018</small>
@@ -211,15 +220,6 @@ var disqus_shortname = 'yathartha22-github-io' ;
           <a href="/gsoc-week-9">
             GSoC 2018 - Week 9 - Starting up with Lambert equations
             <small>13 Jul 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/gsoc-week-8">
-            GSoC 2018 - Week 8 - Improving solving of logarithmic equations
-            <small>08 Jul 2018</small>
           </a>
         </h3>
       </li>
