@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GSoC 2018 - A great Summer with SymPy
+title: GSoC 2018 - A Great Summer with SymPy
 comments: true
 tags: [ gsoc, Sympy]
 ---
