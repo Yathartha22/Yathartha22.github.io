@@ -4,13 +4,34 @@
  <title>Yathartha Joshi</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-08-10T11:51:16+05:30</updated>
+ <updated>2018-08-22T18:53:59+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Yathartha Joshi</name>
    <email>yathartha32@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>GSoC 2018 - A great Summer with SymPy</title>
+   <link href="http://localhost:4000/gsoc-conclusion"/>
+   <updated>2018-08-22T00:00:00+05:30</updated>
+   <id>http://localhost:4000/gsoc-conclusion</id>
+   <content type="html">&lt;p&gt;Today’s day started with receiving an email from Google. Here is a snapshot:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/gsoc4.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This left a big smile on my face 😄&lt;/p&gt;
+
+&lt;p&gt;The past 3-4 months have been amazing and I have learnt a lot during the course of time. I would like to thank &lt;a href=&quot;https://github.com/asmeurer&quot;&gt;Aaron&lt;/a&gt;, &lt;a href=&quot;https://github.com/certik&quot;&gt;Ondrej&lt;/a&gt; and the &lt;a href=&quot;http://sympy.org&quot;&gt;SymPy&lt;/a&gt; team for providing me with this opportunity, my mentor &lt;a href=&quot;https://github.com/aktech&quot;&gt;Amit Kumar&lt;/a&gt; for guiding me all through the phases and a special thanks to &lt;a href=&quot;https://github.com/smichr&quot;&gt;Chris&lt;/a&gt; who was not officially my mentor but was present all the time for reviweing my work and helping me complete the project successfully.&lt;/p&gt;
+
+&lt;p&gt;Here is what Amit has to say:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/gsoc5.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Though GSoC is completed I will be continuing my contribution in the developement of the software.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2018 - Week 12 - Continuing with logarithmic solver and implementing lambert solver Part-II</title>
