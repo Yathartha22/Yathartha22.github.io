@@ -7,3 +7,8 @@
 - cd into the project
 - run `bundle install` to install dependencies
 - run `bundle exec jekyll serve` to run the server
+
+
+### Update dependencies
+
+- bundle update
